@@ -1,0 +1,31 @@
+\documentclass{scrartcl}
+
+\usepackage[english]{babel}
+\usepackage{amsmath,amssymb,amsthm,hyperref,graphicx,natbib,lpic,xcolor}
+\usepackage[margin=2cm]{geometry}
+\usepackage{hyperref}
+% \usepackage{showkeys}
+\hypersetup{pdfauthor={Manuel Schaich},hidelinks=true}
+
+\graphicspath{{./Pix/}}
+\pagestyle{plain}
+
+\providecommand{\norm}[1]{\left\|#1\right\|}
+\providecommand{\abs}[1]{\left|#1\right|}
+\providecommand{\span}{\text{span}}
+\providecommand{\conv}{\text{conv}}
+\providecommand{\rk}[1]{\text{rank}\left(#1\right)}
+\providecommand{\epi}{\text{epi}}
+
+\begin{document}
+\begin{itemize}
+	\item Equation 8 is not correct I believe:
+	\begin{equation}\begin{split}
+		S_{k+1} &= \{x\in\mathcal X: A^{k+1}x + w_k + A w_{k-1} + \dots + A^k w_1 \in \mathcal X\forall w_j\in\mathcal W\} \cap S_k\\
+		&=\{x\in\mathcal X: x + A^{-k-1}w_k + \dots + A^{-1}w_1\in A^{-k-1} \mathcal X\forall w_k\in\mathcal W\}\cap S_k\\
+		&=A^{-k-1}(\mathcal X \ominus \bigoplus_{j=1}^k A^{-j}\mathcal W)\cap S_k
+	\end{split}\end{equation}
+	\item I assume you'd like me to generate some illustrating examples of these critical sets and also the approximation to $\alpha^\ast$
+	\item In [7] we did not assume the existence of a lower dimensional disturbance because we made no further assumptions on $\mathcal W$ except for that it was bounded. We can show all the results we presented for a lower dimensional $\mathcal W$ as long as it is bounded. I.e. we can use a system description $x^+=Ax+Dw$ with a full dimensional $w\in\mathcal W$.
+\end{itemize}
+\end{document}
