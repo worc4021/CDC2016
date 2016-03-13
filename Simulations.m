@@ -31,4 +31,6 @@ LambdaC = [Lambda,zeros(size(lambda));
             zeros(2),[Cand;-1]];
 lambdaC = [lambda;1;0];
 
+[sLambda,slambda] = MRPIscalarDist(LambdaC,lambdaC,A,d,1000,'Moritz');
+
 

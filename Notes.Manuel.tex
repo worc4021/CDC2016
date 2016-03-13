@@ -1,7 +1,7 @@
 \documentclass{scrartcl}
 
 \usepackage[english]{babel}
-\usepackage{amsmath,amssymb,amsthm,hyperref,graphicx,natbib,lpic,xcolor}
+\usepackage{amsmath,amssymb,amsthm,hyperref,graphicx,lpic,xcolor}
 \usepackage[margin=2cm]{geometry}
 \usepackage{hyperref}
 % \usepackage{showkeys}
@@ -17,6 +17,11 @@
 \providecommand{\rk}[1]{\text{rank}\left(#1\right)}
 \providecommand{\epi}{\text{epi}}
 
+
+\newtheorem{thm}{Lemma}
+\newtheorem{prop}[thm]{Proposition}
+
+
 \begin{document}
 \begin{itemize}
 	\item Equation 8 is not correct I believe:
@@ -28,4 +33,265 @@
 	\item I assume you'd like me to generate some illustrating examples of these critical sets and also the approximation to $\alpha^\ast$
 	\item In [7] we did not assume the existence of a lower dimensional disturbance because we made no further assumptions on $\mathcal W$ except for that it was bounded. We can show all the results we presented for a lower dimensional $\mathcal W$ as long as it is bounded. I.e. we can use a system description $x^+=Ax+Dw$ with a full dimensional $w\in\mathcal W$.
 \end{itemize}
+
+
+\section{Sets defined by norm-balls}
+Let $\norm{\cdot}$ denote any norm.
+%
+Let the sets $A = \{x:\norm{x}\leq r_1\}$ and $B=\{x:\norm{x}\leq r_2\}$ be given by the balls of radius $r_1$ and $r_2$ respectively.
+%
+The Minkowski sum of the sets $A\oplus B$ is defined as
+%
+\begin{equation}
+	A\oplus B = \{z = x+y: x\in A\wedge y\in B\}
+\end{equation}
+%
+and the Pontryagin difference $A\ominus B$ is given as
+%
+\begin{equation}
+	A\ominus B = \{z: z+y\in A\;\forall y\in B\}
+\end{equation}
+%
+Notice that due to the sublinearity of the norm the sets $A$ and $B$ are always convex.
+%
+It is known that for convex $A$ and $B$ the sets $A\oplus B$ and $A\ominus B$ are convex as well.
+%
+\begin{thm}
+The following two inclusions hold:
+\begin{enumerate}
+\item 
+%
+The ball or radius $r_1+r_2$ is contained in $A\oplus B$, i.e. 
+%
+\begin{equation}
+	\{x:\norm{x}\leq r_1+r_2\}\subseteq A\oplus B.
+\end{equation}
+%
+\item
+%
+The ball of radius $r_1-r_2$ is contained in $A\ominus B$, i.e.
+%
+\begin{equation}
+	\{x:\norm{x}\leq r_1-r_2\}\subseteq A\ominus B.
+\end{equation}
+\end{enumerate}
+\end{thm}
+%
+\begin{proof}
+Both statements follow from the triangle inequality.
+%
+For the first statement observe that $\norm{x+y}\leq r_1+r_2$ implies that $\norm{x}+\norm{y}\leq r_1+r_2$ which is equivalent to $\norm{x}\leq r_1\wedge\norm{y}\leq r_2$ which is the definition of $A\oplus B$.
+%
+The second statement follows since the Pontryagin difference is defined using the Pontryagin difference:
+%
+If $\norm{z}\leq r_1 -r_2$ then $\norm{z+y}\leq\norm{z}+\norm{y}\leq r_1-r_2+r_2$.
+\end{proof}
+%
+%
+%
+%
+\section{Lyapunov bounds on set convergence}
+Let $x^+ = \Psi x$ with an asymptotically stable $\Psi$, i.e. the spectral radius $\rho(\Psi)<1$.
+%
+The converse Lyapunov theorem states that there exists one positive definite $P>0$ such that the Lyapunov equation
+$\Psi^TP\Psi-P+Q=0$ holds for any positive definite $Q>0$, this matrix is given by $P=\sum_{k\geq0}(\Psi^k)^TQ\Psi^k$.
+%
+Since $Q>0$ and $P$ is defined as a series of congruent transformations of $Q$ we have~$Q\leq P$.
+%
+Maximising over $\delta$ such that $\delta P\leq Q$ holds, we obtain a measure of the contraction of $\Psi$:
+%
+\begin{equation}
+	0 = x^T\Psi^TP\Psi x-x^TPx+x^TQx\geq x^T(\Psi^TP\Psi-P+\delta P)x.
+\end{equation}
+%
+Since $P>0$ the quadratic form $x^TPx=\norm{x}_P^2$ defines a norm and we get $0\leq\norm{\Psi x}_P^2\leq(1-\delta)\norm{x}_P^2$.
+%
+It immediately follows that the inverse $\Psi^{-1}$ satisfies $(1-\delta)^{-1}\norm{x}_P^2\leq\norm{\Psi^{-1}x}_P^2$ with the same $\delta$.
+%
+In general $\delta$ depends on the choice of $Q$ but is positive and strictly less than one, since $\Psi$ is asymptotically stable.
+%
+For the purpose of tight convergence rates we would like to find the smallest possible $\delta$:
+\\[1em]
+Notice that due to \emph{Sylvester's law of inertia} there is a unique invertible matrix $G$ such that $G^TPG = Q$ this matrix can be found by using normalised eigenvectors of $P$ and $Q$ respectively:
+%
+\begin{equation}
+	s_i^T Qs_i = \lambda_i s_i^Ts_i \Rightarrow \left(\begin{array}{ccc}\frac{1}{\sqrt{\lambda_1}}s_1 &\dots & \frac{1}{\sqrt{\lambda_n}}s_n\end{array}\right)^T Q \underbrace{\left(\begin{array}{ccc}\frac{1}{\sqrt{\lambda_1}}s_1 &\dots & \frac{1}{\sqrt{\lambda_n}}s_n\end{array}\right)}_S = I = R^TPR
+\end{equation}
+%
+where the columns of $R$ are chosen as normalised eigenvectors of $P$.
+%
+Hence $G=RS^{-1}$, sadly this result does not lead us to a way to choose $Q$ to produce the maximal contraction $1-\delta$.
+%
+%
+%
+%
+%
+%
+\section{Connection to the \emph{stability degree}}
+%
+%
+For a dynamical system $\dot x = A(t)x$ the \emph{decay rate}\footnote{See e.g. Boyd et al. \textit{Linear Matrix Inequalities in System and Control Theory}.} $\alpha$ is defined as the largest number such that $\lim_{t\rightarrow\infty}e^{\alpha t}\norm{x(t)}=0$ holds for all trajectories.
+%
+For discrete time systems $x[k+1] = \Psi[k] x[k]$ we define the decay rate as the smallest value $\lambda$ such that $\lim_{k\rightarrow\infty}\lambda^k\norm{x[k]}=0$.
+%
+We use the Lyapunov function $V(\xi) = \xi^TP\xi$ to derive an upper bound to $\lambda$:
+%
+If $V[k+1]-V[k]\leq-\delta V[k]$ holds for all trajectories $x[k]$ (with $V[k] = V(x[k])$), then clearly the decay rate is bounded from above by $1-\delta$ since $V[k]\leq(1-\delta)^k V[0]$.
+%
+We can prove the following statement:
+%
+\begin{thm}
+Let $\Psi$ be asymptotically stable and let $\rho(\Psi)$ denote the spectral radius of $\Psi$, i.e. there exists at least one eigenvalue $\gamma$ and an eigenvector $v$ such that $\Psi v = \gamma v$ with $\abs{\gamma}=\rho(\Psi)$, then the bound $\rho^2\leq1-\delta$ is tight and is attained for $P=\Psi^T\Psi$.
+\end{thm}
+%
+\begin{proof}
+Using the test vector $\tilde\xi=\frac{v}{\norm{v}_P}$ we obtain $\gamma^\ast\tilde\xi^H P\tilde \xi\gamma\leq(1-\rho)\tilde\xi^H P\tilde\xi$ but $\gamma^\ast\gamma = \abs{\gamma}^2 = \rho(\Psi)^2$.
+%
+The symmetric matrix $P = \Psi^T\Psi$ is positive definite for any invertible $\Psi$ and hence $\xi^T P\xi$ defines the square of a norm and using the same test vector we obtain $1-\delta=\rho(\Psi)^2$.
+%
+\end{proof}
+%
+The value of $1-\delta$ i.e. $\rho(\Psi)^2$ is also referred to as \emph{stability degree}, see again LMI book by Boyd (Section 5.1.3).
+%
+Notice that we can not prove that $\lambda=\rho(\Psi)^2$ since the norm in the definition of $\lambda$ is undefined and might be non-quadratic.
+%
+%
+%
+%
+%
+\section{Finite determinability of MRPI algorithm for scaled disturbances}
+
+We want to compute the maximal robust positive invariant set for the constrained linear system $x^+=\Psi x +Dw$
+with $x,x^+\in\mathcal X=\{x:\Lambda_i x\leq \lambda_i\;i\in\mathcal I\}$.
+%
+The disturbance is assumed to be in a uniformly scaled set $w\in\mathcal W(\alpha)=\alpha W = \{w:Gw\leq\alpha{\bf{1}}\}$.
+%
+In the sequel we describe the algorithm presented in~\cite{Schaich:CDC} and an amendment to guarantee overall finite determinability.
+%
+For this we assume we have the initial parametrised state constraints in the way $\mathcal Z=\{(x,\alpha) = \mathcal F_i x + \mathcal G_i\alpha\leq1,\;i\in\mathcal J\}$.
+%
+Starting from all tuples in the original constraints $(x,\alpha)\in\mathcal Z$ we want to discard all states for which the successor state is not contained in the constraint set for the same value of the parameter under any realisation of the disturbance, i.e. $(x^+,\alpha)\not\in\mathcal Z \Rightarrow (x^+,\alpha)\not\in Z_1$.
+%
+Notice that for every fixed parameter~$\tilde\alpha$ this is merely the Gilbert-Tan algorithm~\cite{Kolmanovsky:1995} using $w\in\tilde\alpha W$.
+%
+Algorithmically this is done by setting $Z_0=\mathcal Z$ and defining the first set iterate as
+%
+\begin{equation}\begin{split}
+	Z_1 &= Z_0 \cap \{(x,\alpha): \mathcal F_i(\Psi x+ Dw)+\mathcal G_i\alpha\leq 1,\;\forall w\in \mathcal W(\alpha)\;i\in\mathcal J\}\\
+	&= Z_0 \cap \left\{(x,\alpha): \mathcal F_i \Psi x + \underbrace{\max_{w\in\mathcal W(\alpha)} F_i Dw}_{(\ast)} + \mathcal G_i \leq 1,\; i\in\mathcal J\right\}
+\end{split}\end{equation}
+%
+Notice that the maximisation~$(\ast)$ is a scalar multi-parametric linear program (mpLP) that can be solved parameter-independently:
+%
+\begin{equation}
+	\begin{array}{rl}\max & c^T w\\
+	\text{s.t.}& w\in\alpha W
+	\end{array} = 
+	\begin{array}{rl}\max & c^T w\\
+	\text{s.t.} & \frac{w}{\alpha}\in W
+	\end{array}
+	\overset{v=\frac{w}{\alpha}}{=} \begin{array}{rl}
+	\max & \alpha c^T v\\
+	\text{s.t.} & v\in W
+	\end{array} = \alpha\begin{array}{rl} \max& c^T v \\ \text{s.t.} & v\in W \end{array}
+\end{equation}
+%
+this leads to
+%
+\begin{equation}
+	Z_1 = Z_0 \cap \{(x,\alpha): \mathcal F_i \Psi x + (\mathcal G_i + v_{i,0})\alpha \leq 1 \; i\in\mathcal J \}.
+\end{equation}
+%
+And subsequent set iterates are defined recursively
+%
+\begin{equation}
+	Z_{k+1} = Z_k \cap \underbrace{\left(\{(x,\alpha): \mathcal F_i\Psi^{k+1} x + \left(\mathcal G_i + \sum_{l=0}^k v_{i,l} \right)\alpha \leq 1\right\}}_{D_k}
+\end{equation}
+%
+with
+% 
+\begin{equation}
+	v_{i,k} = \left\{\begin{array}{rl}\max & \mathcal F_i \Psi^k Dw \\ \text{s.t.}& w\in W\end{array}\right. .
+\end{equation}
+%
+\begin{prop}\label{prop:existence:alpha:star}
+There exists a unique scaling parameter~$\alpha^\ast$ such that 
+\begin{enumerate}
+\item for all $0\leq\alpha\leq\alpha^\ast$ the set iterates $Z_N\vert_{\alpha}\subseteq Z_{N+1}\vert_{\alpha} = \{x: (x,\alpha)\in Z_{N+1}\}$ for a finite $N$,
+\item for all $\alpha>\alpha^\ast$ the set iterates  $Z_k\vert_{\alpha}=\emptyset$ for some $k\in\mathbb N$.
+\end{enumerate}
+\end{prop}
+%
+\begin{proof}
+The first proposition is proven in~\cite{Schaich:CDC}. 
+%
+For the second one: observe that $D_k$ is contained in the halfspace $H_k = \{(x,\alpha): \max_{i\in\mathcal J}(\mathcal G_i + \sum_{l=0}^k v_{i,l})\alpha\leq1 \}$.
+%
+This can easily be checked by setting $x=0$ in the definition of $D_k$, furthermore we for simplicity we assume that $D_k\vert_\alpha$ is bounded for all $\alpha>0$, so that $\max_{(x,\alpha)\in D_k}\alpha = \frac{1}{\max_{i\in\mathcal J}(\mathcal G_i + \sum_{l=0}^k v_{i,l})}$.
+%
+In general this will not be true, however, since we intersect with $Z_k$ we obtain a bounded set after at most $n$ iterations (for $n$ the state dimension), the assumption merely ensures that the maximum is always attained.
+
+Since the disturbance set has to contain the origin in its interior $0\in\text{int} (W)$ it follows that $v_{i,l}>0$ for all $i\in\mathcal J$ and $l\in\mathbb N$.
+%
+It follows that $H_k\subset H_{k-1}$ which implies that intersecting $Z_{k-1}\cap D_k \subset Z_{k-1}$, however, this inclusion is only strict in $\alpha$.
+%
+The half-spaces $H_k$ converge towards the half-space $H_\infty = \{(x,\alpha):\max_{i\in\mathcal J}(\mathcal G_i + \sum_{l=0}^\infty v_{i,l})\alpha\leq1\}$.
+%
+In essence the strict inclusion of the half-spaces implies that at each iteration of the overall set for all $\alpha\geq0$ the condition $Z_N\subseteq Z_{N+1}$ can not hold for a finite $N$ since $\max_{(x,\alpha)\in Z_N} \alpha = \frac{1}{\max_{i\in\mathcal J}(\mathcal G_i + \sum_{l=0}^N v_{i,l})}$ which is infeasible at iteration $N+1$.
+\end{proof}
+%
+However, we can calculate $\alpha^\ast$ in advance since we know that it is given by $\alpha^\ast = \frac{1}{\max_{i\in\mathcal J}(\mathcal G_i + \sum_{l=0}^\infty v_{i,l})}$, then the algorithm initialised with $Z_0=\mathcal Z\cap H_\infty$ terminates in a finite number of iterations.
+
+\section{Approximating $\alpha^\ast$}
+%
+%
+The exact value of $\alpha^\ast$ is given by
+%
+\begin{equation}
+	\frac{1}{\alpha^\ast} = \max_{i\in\mathcal J}(\mathcal G_i + \sum_{l=0}^\infty v_{i,l}) = \max_{i\in\mathcal J}\left\{ \mathcal G_i + \sum_{l=0}^\infty \max_{w\in W} \mathcal F_i\Psi^lDw\right\}.
+\end{equation}
+%
+Note that if the disturbance set was a $P$-ball of radius $\eta$, i.e. $W = \{w: w^TPw\leq\eta^2\}$ the maximisation simplifies to 
+%
+\begin{equation}
+	\max_{ \norm{w}_P\leq \eta } \mathcal F_i\Psi^l D w = \frac{\norm{ \left(\mathcal F_i\Psi^l D\right)^T}_2^2}{\norm{ \left(\mathcal F_i\Psi^l D\right)^T }_P } \eta.
+\end{equation}
+%
+Now assume that $D=I$ is the identity matrix, then we have $\lambda_{\min}\norm{x}_2^2\leq\norm{x}_P^2\leq\lambda_{\max}\norm{x}_2$ where $\lambda_{\min}$ and $\lambda_{\max}$ denote the smallest and largest eigenvalue of $P$ respectively, this leads us to 
+%
+\begin{equation}
+	\max_{w\in W} \mathcal F_i\Psi^l w = \frac{\norm{ \left(\mathcal F_i\Psi^l \right)^T }_2^2}{\norm{\left(\mathcal F_i\Psi^l \right)^T }_P } \eta \leq \eta\sqrt{\frac{1}{\lambda_{\min}}}\norm{\left(\mathcal F_i\Psi^l \right)^T }_P\leq \eta\sqrt{\frac{1}{\lambda_{\min}}}(1-\rho(\Psi))^{\frac{l}{2}}\norm{\mathcal F_i^T }_P
+\end{equation}
+%
+Denoting by $R$ the radius of the smallest $P$-ball containing $W$ we get
+%
+\begin{equation}
+	 \max_{w\in W} \mathcal F_i\Psi^lw \leq R\sqrt{\frac{1}{\lambda_{\min}}}\norm{\mathcal F_i^T }_P(1-\rho(\Psi))^{\frac{l}{2}}.
+\end{equation}
+%
+This leads us to the majorand 
+%
+\begin{equation}
+	\mathcal G_i + \sum_{l=0}^\infty \max_{w\in W} \mathcal F_i\Psi^l w \leq \mathcal G_i + R\sqrt{\frac{1}{\lambda_{\min}}}\norm{\mathcal F_i^T }_P \sum_{l=0}^\infty (1-\rho(\Psi))^{\frac{l}{2}}
+\end{equation}
+%
+Using the maximal value of $\tilde h = \max_{i\in\mathcal J} \mathcal G_i + R\sqrt{\frac{1}{\lambda_{\min}}}\frac{\norm{\mathcal F_i^T}_P }{1-\sqrt{1-\rho(\Psi)}}$ to use instead of $(\alpha^\ast)^{-1}$ in the initialisation of the problem provides an inner approximation to the accurate $H_\infty$.
+%
+\begin{prop}
+The presented algorithm terminates after a finite number of iterations for the modified initial iterate $Z_0=\mathcal Z\cap \{(x,\alpha): \tilde h\alpha\leq1\}$ for all values of $\alpha$.
+\end{prop}
+
+\begin{proof}
+Since $\frac{1}{\tilde h}\leq\alpha^\ast$ the behaviour is unchanged for all non-empty cuts $Z_k\vert_\alpha\neq\emptyset$ in the interval $[0,\frac{1}{\tilde h}]$ and the case (2) in proposition~\ref{prop:existence:alpha:star} is discarded in the initialisation.
+\end{proof}
+%
+Notice that although $\alpha^\ast$ can be approximated numerically by solving a finite number of linear programs, this approximation leads to an upper bound, since all terms of the series are positive and decay to zero and $\alpha^\ast$ is defined in a reciprocal manner.
+%
+%
+%
+\begin{thebibliography}{9}
+\bibitem{Schaich:CDC} R.~M.~Schaich, and~M.~Cannon \emph{Robust positively invariant sets for state dependent and scaled disturbances}, CDC, 2015.
+\bibitem{Kolmanovsky:1995} I.~Kolmanovsky, and~E.~G.~Gilbert \emph{Maximal output admissible sets for discrete-time systems with disturbance inputs}, ACC, 1995.
+\end{thebibliography}
+
 \end{document}
