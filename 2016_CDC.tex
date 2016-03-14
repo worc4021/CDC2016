@@ -459,6 +459,10 @@ Obviously, $\Rr_\infty^\alpha \subseteq  (1+\epsilon) \, \Rr_M^\alpha $ can equi
 \end{proof}
 
 
+
+
+
+
 \begin{thm}
 Let Assum.~\ref{assum:AXW} be satisfied and let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} < \alpha^\ast$. Assume $N \in \N$ is such that
  \begin{equation}
@@ -504,6 +508,13 @@ $$
 according to~\eqref{eq:criticalAlpha} and \cite[Rem.~2.1]{Kolmanovsky1998}. Thus, \eqref{eq:auxiliaryConditionZFinitelyDetermined} and consequently~\eqref{eq:ZNPlus1EqualsZN} holds, if~\eqref{eq:conditionZFinitelyDetermined} is fulfilled.
 \end{proof}
 
+
+
+\begin{equation}
+\label{eq:sequenceTk}
+\T_{k+1} := A^{-1} (\T_k \ominus \W^\ast) \cap \X \quad \text{with} \quad  \T_{0}:=\X \cap (1+\epsilon) \Rr_M^1 ,
+\end{equation}
+
 \begin{rem}
 Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproximation} and~\eqref{eq:conditionZFinitelyDetermined}, respectively, can always be found since both $\mu$ and $\eta$ lie in the interval $(0,1)$, since the eigenvalues of $A$ are strictly stable, and since $\X$ is a C-set according to Assum.~\ref{assum:AXW}. Assume, for example, that $\lb{r},\ub{r} \in \R_+$ denote the radii of a ball that is contained in $\W^\ast$ and a ball that contains $\W^\ast$, respectively. Then, \eqref{eq:conditionYEpsApproximation} holds if 
 $$
@@ -512,31 +523,44 @@ $$
 \end{rem}
 
 
-\section{Iterative computation of parametric sets}
 
 
-$$
-h_{\W^\alpha}(c) = \sup_{w^\ast \in \W^\ast} \! c \,w^\ast = \alpha \sup_{w^\ast \in \W^\ast} \! c \, w^\ast = \alpha \, h_{\W^\ast}(c)
-$$
 
-$$
-\Ss_k^\alpha = \left\{ x \in \R^n \,|\, H A^j x \leq d - \alpha\,\sum_{i=0}^{j-1} h_{\W^\ast} (H A^i), \, j \in \N_{[0,k]} \right\}
-$$
-
-\begin{align}
-\nonumber
-\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \{ z \in \R^{n+1} \,|\, \begin{pmatrix} H A^j & \sum_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq \boldsymbol{1}, \quad\\
-\nonumber
- j \in \N_{[0,k]}, \lb{\alpha} \leq z_{n+1} \leq \ub{\alpha} \}
-\end{align}
-
-$\Psi(H)$
 
 \section{Approximation of the critical scaling}
 
 $$
 \hat{\alpha}^\ast 
 $$
+
+
+\section{Computation for polytopic sets}
+
+
+
+
+
+
+polytope
+
+$$
+\Ss_k^\alpha = \bigg\{ x \in \R^n \,\bigg|\, H A^j x \leq d - \sum_{i=0}^{j-1} h_{\W^\alpha} (H A^i), \, \forall j \in \N_{[0,k]} \bigg\}
+$$
+
+$$
+h_{\W^\alpha}(c) = \sup_{w \in \W^\alpha} \! c \,w = \alpha \sup_{w^\ast \in \W^\ast} \! c \, w^\ast = \alpha \, h_{\W^\ast}(c)
+$$
+
+
+\begin{align}
+\nonumber
+\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \Big\{ z \in \R^{n+1} \,\Big|\, \begin{pmatrix} H A^j & \sum \limits_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq d, \,\,\,\\
+\nonumber
+\lb{\alpha} \leq z_{n+1} \leq \ub{\alpha},  \,\, \forall  j \in \N_{[0,k]}, \Big\}
+\end{align}
+
+$\Psi(H)$
+
 
 \section{Numerical examples}
 
