@@ -11,15 +11,15 @@ First we consider the scalar system presented in~\cite[Exmp.~6.10]{Blanchini2008
 %
 where the state is constrained to the interval~$\X=[-2,2]$ and the disturbance has the nominal amplitude~$\W^\ast=[-1,1]$.
 %
-In this case the critical alpha can be explicitly calculated to be~$\alpha^\ast=2$.
+In this case the critical alpha can be explicitly calculated to be~$\alpha^\ast=1$ and both $\mathcal Z_\infty^{[0,\alpha^\ast]}$ and $\mathcal Y_\infty^{[0,\alpha^\ast]}$ can be explicitly determined.
 %
-The graph~$\mathcal Z^{(0,2]}_\infty$ is illustrated in Figure~\ref{fig:first:example}.
+The graph~$\mathcal Z^{[\frac{1}{2},1]}_\infty$ is illustrated in Figure~\ref{fig:first:example}.
 
 
 The second system we consider is the two-dimensional example presented in~\cite[Sect.~4.1]{Mayne2005}:
 %
 \[
-x(k+1) = \left(\begin{array}{cc} 1 &1 \\ 0& 1\end{array}\right) x(k) + \left(\begin{array}{c}\frac{1}{2}\\1\end{array}\right) u(k) + w(k)
+	x(k+1) = \left(\begin{array}{cc} 1 &1 \\ 0& 1\end{array}\right) x(k) + \left(\begin{array}{c}\frac{1}{2}\\1\end{array}\right) u(k) + w(k)
 \]
 %
 where the input is given by the Riccati controller $u = Kx$  with $Q = I$ and $R=0.01$.
@@ -27,15 +27,58 @@ where the input is given by the Riccati controller $u = Kx$  with $Q = I$ and $R
 The constraints for this system are given by $\mathcal X = \{x\in\mathbb R^2\vert x_2\leq2,-1\leq Kx\leq 1\}$ and $\mathcal W^\ast = [-\frac{1}{10},\frac{1}{10}]\times [-\frac{1}{10},\frac{1}{10}]$.
 %
 For this setup the approximation of $\alpha^\ast$ leads to the lower and upper bounds $\underline\alpha = 3.362391$ and $\bar\alpha=3.362728$ respectively.
+%
+\begin{figure}
+\centering
+\begin{tikzpicture}
+\draw[-latex'] (0,0) node[below] {$0$} -- (0,2) node[right] {$\alpha$};
+\draw[-latex'] (-2.2,0) -- (2.2,0) node[right] {$x$};
+\draw (.1,1) -- (-.1,1) node[above right] {$\alpha^\ast$};
+\draw (-2,1) -- (0,0) -- (2,1);
+\fill[pattern = north east lines, opacity=0.8] (-2,1) -- (0,0) -- (2,1) -- cycle;
+\draw (2,.1) -- (2,-.1) node[below] {$2$};
+\draw (-2,.1) -- (-2,-.1) node[below] {$-2$};
+\end{tikzpicture}
+\caption{$\mathcal Y_\infty^{[0,\alpha^\ast]}$ for $x(k+1) = \frac{1}{2}x(k) + w$.}\label{fig:first:example:mRPI}
+\end{figure}
+%
+\begin{figure}\centering
+\begin{tikzpicture}
+	\draw[-latex'] (0,0) node[below] {$0$} -- (0,2) node[right] {$\alpha$};
+	\draw[-latex'] (-2.2,0) -- (2.2,0) node[right] {$x$}; 
+	\fill[pattern = north east lines, opacity=0.8] (-2,0) -- (2,0) node[below] {$2$} -- (2,1) -- (-2,1) -- cycle;
+	\draw (2,0) -- (2,1);
+	\draw (.1,1) -- (-.1,1) node[above right] {$\alpha^\ast$};
+	\draw (-2,0) node[below] {$-2$} -- (-2,1);
+\end{tikzpicture}
+\caption{$\mathcal Z_\infty^{[0,\alpha^\ast]}$ for the $x(k+1) = \frac{1}{2}x(k) + w$.}\label{fig:first:example:MRPI}
+\end{figure}
+
+\begin{figure}
+\tdplotsetmaincoords{80}{-30}
+\centering
+\begin{tikzpicture}[tdplot_main_coords]
+\draw[-latex'] (0,0,0) -- (0,0,3.5) node[right] {$\alpha$};
+\draw[-latex'] (0,0,0) -- (0,2.1,0) node[below] {$x_2$};
+\draw[-latex'] (0,0,0) -- (3.5,0,0) node[below] {$x_1$};
+\draw (2.5562,-0.5198,0) -- (-2.5000, 2.0000, 0) -- (-3.2716, 2.0000, 0) -- (-2.5562, 0.5198, 0) -- (3.5165, -2.5066,0) -- cycle;
+\draw (-2.5000, 2.0000, 0) -- (-2.5000, 2.0000, 1.6849) -- (-3.2716, 2.0000, 0);
+\draw (-2.5000, 2.0000, 1.6849) -- (-1.4878, 1.4956, 3.3627);
+\draw (-2.5562, 0.5198, 0) -- (-0.5275, -0.4912, 3.3627);
+\draw (3.5165, -2.5066,0) -- (1.4878, -1.4956, 3.3627);
+\draw (2.5562,-0.5198,0) -- (0.5275,0.4912,3.3627);
+\draw (1.4878, -1.4956, 3.3627) -- (0.5275,0.4912,3.3627) -- (-1.4878, 1.4956, 3.3627) -- (-0.5275, -0.4912, 3.3627) -- cycle;
+\end{tikzpicture}
+\caption{$\mathcal Z_\infty^{[0,\underline\alpha]}$}\label{fig:second:example}
+\end{figure}
 
 \begin{figure}\centering
 \begin{tikzpicture}
-	\draw[-latex'] (0,0) node[below] {$0$} -- (0,3) node[right] {$\alpha$};
-	\draw[-latex'] (-2.2,0) -- (2.2,0) node[right] {$x$}; 
-	\fill[pattern = north east lines, opacity=0.8] (-2,0) -- (2,0) node[below] {$2$} -- (2,2) -- (-2,2) -- cycle;
-	\draw (2,0) -- (2,2);
-	\draw (.1,2) -- (-.1,2) node[above right] {$\alpha^\ast$};
-	\draw (-2,0) node[below] {$-2$} -- (-2,2);
+\draw[-latex'] (0,0) -- (0,2) node[right] {$x_2$};
+\draw[-latex'] (0,0) -- (2.5,0) node[below] {$x_1$};
+\draw (1.9529,   -0.2191) -- (-2.5000,    2.0000) -- (-2.8137,    2.0000) -- (-1.9529,    0.2191) -- (2.9132,   -2.2059) -- cycle; % \alpha = 1
+\draw (1.5397,   -0.0132) -- (-2.5000,    2.0000) -- (-2.5000,    2.0000) -- (-1.5397,    0.0132) -- (2.5000,   -2.0000) -- cycle; %\alpha = 1.6849
+\draw[densely dotted] (2.0615,   -1.0928) -- (1.5397,   -0.0132) -- (-0.8800,    1.1927) -- (-2.2755,    1.8881) -- (-2.4459,    1.8881) -- (-1.5397,    0.0132) -- (1.1045,   -1.3046) -- (2.5000,   -2.0000) -- cycle; % interpolated
+\draw (2.0082,   -1.7549) -- (1.0480,    0.2318) -- (-2.0082,    1.7549) -- (-1.0480,   -0.2318) -- cycle; %\alpha = 2.5
 \end{tikzpicture}
-\caption{$\mathcal Z_\infty^{[0,\alpha^\ast]}$ for the $x(k+1) = \frac{1}{2}x(k) + w$.}\label{fig:first:example}
 \end{figure}
