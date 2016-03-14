@@ -33,8 +33,8 @@
 \usepackage{epstopdf}
 \usepackage{booktabs}
 \usepackage{tikz}
-\usepackage{tikz-3dplot}
 \usetikzlibrary{arrows,positioning,patterns,decorations.pathreplacing}
+\usepackage{tikz-3dplot}
 
 \newcommand{\subparagraph}{}
 
@@ -595,42 +595,53 @@ In Sect.~\ref{sec:parametricRPIsets}, we discussed properties of parametric RPI 
 However, the actual computation of the sets $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ and $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ and the approximation of $\alpha^\ast$ is demanding for this general setup. 
 We thus consider polytopic sets $\X$ and $\W^\ast$ to illustrate the  findings in Sect.~\ref{sec:parametricRPIsets}. 
 In this case, it is well-known that the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ are  polytopes as well.
-In fact, for state constraints $\X$ of the form
+As for $\Rr_k^\alpha$, this observation immediately follows from~\eqref{eq:RkAlphaRk1}. Regarding $\Ss_k^\alpha$, we first
+assume that the state constraints $\X$ are given by
 $$
 \X = \{ x \in \R^n \,|\, H x \leq d \}
 $$
-with $H \in \R^{L \times n}$ and $d \in \R^L$,
-the sets $\Ss_k^\alpha$ (from~\eqref{eq:sequenceSk}) can be expressed as
-$$
-\Ss_k^\alpha = \bigg\{ x \in \R^n \,\bigg|\, H A^j x \leq d - \sum_{i=0}^{j-1} h_{\W^\alpha} (H A^i), \, \forall j \in \N_{[0,k]} \bigg\}
-$$
+with $H \in \R^{L \times n}$ and $d \in \R^L$.
+Then,  the sets $\Ss_k^\alpha$ can be expressed as
+\begin{equation}
+\label{eq:SkPolytope}
+\!\,\Ss_k^\alpha \!=\! \bigg\{ \!x \!\in\! \R^n \bigg| H A^j x \leq d -\! \sum_{i=0}^{j-1} \!h_{\W^\alpha}\!\,(H A^i), \, \forall j \! \in \! \N_{[0,k]} \!\bigg\}\!\!\!\!\!
+\end{equation}
 according to \cite[p. 342]{Kolmanovsky1998}.
-Thereby, $h_{\W^\alpha} (H A^i)$ can be computed by solving $L$ linear programs. In addition, it is easy to see that
-$$
+Thereby, the term $h_{\W^\alpha} (H A^i)$ can be computed by solving $L$ linear programs. 
+Having polytopic sets $\Rr_k^\alpha$ and taking Lem.~\ref{lem:YalphaConvY1} into account, immediately implies that $
+\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ is a polytope.
+To see that $
+\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ is polytopic as well, first note that
+\begin{equation}
+\label{eq:hWalpha}
 h_{\W^\alpha}(c) = \sup_{w \in \W^\alpha}  c \,w = \alpha \sup_{w^\ast \in \W^\ast}  c \, w^\ast = \alpha \, h_{\W^\ast}(c)
-$$
+\end{equation}
 for any $c \in \R^{1 \times n}$.
-
-
+Using~\eqref{eq:hWalpha} in~\eqref{eq:SkPolytope} and substituting the result in~\eqref{ZIk} yields
 \begin{align}
 \nonumber
-\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \bigg \{ z \in \R^{n+1} \,\bigg|\, \begin{pmatrix} H A^j & \sum \limits_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq d, \,\,\,\\
-\nonumber
-\lb{\alpha} \leq z_{n+1} \leq \ub{\alpha},  \,\, \forall  j \in \N_{[0,k]} \bigg\}
+\!\!\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \bigg \{ z \in \R^{n+1} \,\bigg|\, \begin{pmatrix} H A^j & \sum \limits_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq d, \!\!\!\!\!\!\\
+\label{eq:ZkPolytope}
+\lb{\alpha} \leq z_{n+1} \leq \ub{\alpha},  \, \forall  j \in \N_{[0,k]} \bigg\} \quad  \!\!\!\!\!
 \end{align}
+after some basic manipulations.
+Clearly, $\Z_k^{[\lb{\alpha},\ub{\alpha}]}$ as in~\eqref{eq:ZkPolytope} is a polytope. 
+This observation is discussed in more detail in~\cite{Schaich2015}.
 
-This is discussed in more detail in \cite{Schaich2015}.
+
 
 \subsection{Example 1}
 
 We first consider system~\eqref{eq:system} with 
 $A=0.5$
-and the constraints $\X=[-2,2]$ and $\W^\ast=[-1,1]$.
+and the constraints $\X=[-2,2]$ and $\W^\ast=[-1,1]$. This one-dimensional example (without state constraints) was also analyzed in \cite[Exmp.~6.10]{Blanchini2008}.
 
-\cite[Exmp.~6.10]{Blanchini2008}
+Since
+$$
+\epsilon \leq \frac{\hat{\alpha}^\ast}{\ub{\alpha}}-1  \leq \frac{\alpha^\ast}{\ub{\alpha}}-1,
+$$
 
-  and 
-
+\subsection{Example 2}
 
  \cite[Sect.~4.1]{Mayne2005} 
 
@@ -640,7 +651,7 @@ $\begin{pmatrix}
 
 
   $\begin{array}{rl}
--50\!\!\! &\leq x_2 \leq 2 \\
+-4\!\!\! &\leq x_2 \leq 2 \\
 -1\!\!\! &\leq K x \leq 1
 \end{array}$  
 
