@@ -1,0 +1,611 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%        1         2         3         4         5         6         7         8
+
+%\documentclass[letterpaper, 10 pt, conference]{ieeeconf}  % Comment this line out
+                                                          % if you need a4paper
+%\documentclass[a4paper, 10pt, conference]{ieeeconf}      % Use this line for a4
+%\documentclass[10pt, conference]{ieeeconf}                                                    % paper
+
+\documentclass[letterpaper, 10 pt, conference]{ieeeconf}
+
+\IEEEoverridecommandlockouts                              % This command is only
+                                                          % needed if you want to
+                                                          % use the \thanks command
+\overrideIEEEmargins
+% See the \addtolength command later in the file to balance the column lengths
+% on the last page of the document
+
+
+
+
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{amsmath} % assumes amsmath package installed
+\usepackage{amssymb}  % assumes amsmath package installed
+\usepackage{psfrag}
+\usepackage{color}
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage{units}
+\usepackage[top=54pt, left=54pt, right=54pt, bottom=54pt, paper=letterpaper]{geometry}
+\usepackage{paralist}
+\usepackage[table]{xcolor}
+\usepackage[noadjust]{cite}
+\usepackage{epstopdf}
+\usepackage{booktabs}
+
+\newcommand{\subparagraph}{}
+
+%\usepackage{cite}
+\usepackage{titlesec}
+%
+
+\usepackage{accents}
+\newlength{\dhatheight}
+\newcommand{\doublehat}[1]{%
+    \settoheight{\dhatheight}{\ensuremath{\hat{#1}}}%
+    \addtolength{\dhatheight}{-0.25ex}%
+    \hat{\vphantom{\rule{1pt}{\dhatheight}}%
+    \smash{\hat{#1}}}}
+
+%\titlespacing{\section}{3em}{2pt}{2pt}
+%\titlespacing{\subsection}{1em}{1pt}{1pt}
+%\titlespacing{\subsubsection}{1em}{1pt}{1pt}
+
+%\abovedisplayshortskip=1pt
+%\belowdisplayshortskip=1pt
+%\abovedisplayskip=1pt
+%\belowdisplayskip=1pt
+
+
+
+
+
+%% own commands and environments
+ %--------------------------------------
+ 
+%% own macros
+\newtheorem{thm}{Theorem}
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+\newtheorem{assum}{Assumption}
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem{defn}{Definition}
+\newtheorem{exmp}{Example}
+\newtheorem{rem}{Remark}
+\newtheorem{alg}{Algorithm}
+
+\newcommand{\R}{\mathbb{R}} 
+\newcommand{\N}{\mathbb{N}} 
+\newcommand{\C}{\mathbb{C}}
+
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\B}{\mathcal{B}}
+\newcommand{\D}{\mathcal{D}}
+\newcommand{\Cc}{\mathcal{C}}
+\newcommand{\Pp}{\mathcal{P}} 
+\newcommand{\Ll}{\mathcal{L}} 
+\newcommand{\Rr}{\mathcal{R}} 
+\newcommand{\Ss}{\mathcal{S}}
+\newcommand{\W}{\mathcal{W}} 
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\I}{\mathcal{I}}  
+\newcommand{\V}{\mathcal{V}} 
+\newcommand{\U}{\mathcal{U}} 
+\newcommand{\Q}{\mathcal{Q}} 
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\Z}{\mathcal{Z}}
+
+\newcommand{\conv}{\mathrm{conv}}
+
+\newcommand{\lb}[1]{\underline{#1}} 
+\newcommand{\ub}[1]{\overline{#1}} 
+\newcommand{\blind}[1]{\textcolor{white}{#1}}
+
+\title{\bf Parametric robust positively  invariant sets  \\
+for linear systems with scaled disturbances}
+
+%\title{\bf Similarities and disparities among \\
+%nonlinear MPC schemes with guaranteed stability}
+
+
+%\author{ \parbox{3 in}{\centering Huibert Kwakernaak*
+%         \thanks{*Use the $\backslash$thanks command to put information here}\\
+%         Faculty of Electrical Engineering, Mathematics and Computer Science\\
+%         University of Twente\\
+%         7500 AE Enschede, The Netherlands\\
+%         {\tt\small h.kwakernaak@autsubmit.com}}
+%         \hspace*{ 0.5 in}
+%         \parbox{3 in}{ \centering Pradeep Misra**
+%         \thanks{**The footnote marks may be inserted manually}\\
+%        Department of Electrical Engineering \\
+%         Wright State University\\
+%         Dayton, OH 45435, USA\\
+%         {\tt\small pmisra@cs.wright.edu}}
+%}
+
+\author{Moritz Schulze Darup$^{\dagger}$, Rainer Manuel Schaich$^{\dagger}$, and Mark Cannon% <-this % stops a space
+\thanks{*This research was partially funded by the German Research Foundation (DFG) under the grants SCHU 2094/1-1 and SCHU 2094/2-1.}%
+% <-this % stops a space
+\thanks{$^{\dagger}$ These authors contributed equally to this work.}% <-this % stops a space
+\thanks{M. Schulze Darup, R. M. Schaich, and M. Cannon are with 
+the Control Group, Department of Engineering Science,
+        University of Oxford, Parks Road, Oxford OX1 3PJ, UK.
+        E-mail: {\tt mark.cannon@eng.ox.ac.uk}.}%
+}
+
+
+\begin{document}
+\maketitle
+\thispagestyle{empty}
+\pagestyle{empty}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Abstract
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+
+
+Robust positively invariant (RPI) sets are important for performance analysis and synthesis of controllers for uncertain systems (see, e.g., \cite[Sects.~6.4 and 6.5]{Blanchini1999}).
+In particular, RPI sets can be used to design robust model predictive control (MPC) schemes with guaranteed stability (see, e.g., \cite{Kouvaritakis2015,Lee1999,Mayne2006,Mayne2005}). In this paper, we address RPI sets for linear disturbed systems of the form
+\begin{equation}
+\label{eq:system}
+x(k+1) = A \, x(k) + w(k)
+\end{equation}
+ with state and disturbance constraints
+\begin{equation}
+\label{eq:constraints}
+x(k) \in \X  \quad \text{and} \quad w(k) \in \W^\alpha \quad \text{for every} \quad k \in \N.
+\end{equation}
+The set $\W^\alpha := \alpha \, \W^\ast$ denotes a scaled version  of a nominal disturbance set $\W^\ast$ for some scalar $\alpha>0$.
+
+
+Extension of \cite{Schaich2015} in two directions. First, here we consider general C-sets instead of polytopes as in \cite{Schaich2015}. Second, we avoid the occurrence of empty sets by construction.
+
+
+In this paper, the sets $\X$ and $\W^\ast$ are assumed to be full-dimensional (see Assum.~\ref{assum:AXW} further below). While this is restrictive, the same setup was studied in \cite{Rakovic2005} % \cite{Rakovic2005,Schaich2015}.
+
+The paper is organized as follow. We state notation in the remainder of this section.
+
+\subsection{Notation}
+
+We denote positive real and natural numbers by $\R_+$ and $\N_+$, respectively. The notion $\N_{[i,k]}$ refers to $\N_{[i,k]}:=\{ j \in \N \,|\, i \leq j \leq k \}$.
+Now, let $p \in \N_+$ and consider two bounded and convex sets $\U , \V \subset \R^p$ containing the origin. We frequently use the following manipulations of sets.
+ The scaling of a set by some factor $\beta \in \R_+$  is defined as $\beta \,\U := \{ \beta u \in \R^p \,|\, u \in \U\} $.
+Moreover, for $q \in \N_+$ and some matrices $C \in \R^{p\times p}$ and $D \in \R^{q \times p}$, we define $C^{-1} \, \U:= \{ \xi \in \R^p \,|\, C\,\xi \in \U \}$ and  $D\,\U := \{ D u \in \R^q \,|\, u \in \U \} $. Note that $C^{-1} \, \U$ is well defined even if $C$ is not invertible. The operations
+\begin{align*}
+\U \oplus \V &:= \{ u+v \in \R^p \,|\,  u \in \U, v \in \V\} \qquad \text{and} \\
+\U \ominus \V &:= \{ \xi \in \R^p \,|\, \forall v \in \V: \xi+v \in \U\},
+\end{align*}
+describe the Minkowski addition and the Pontryagin difference, respectively. Finally, the support function of the set $\U$ and a row vector $c \in \R^{1 \times p}$ is defined as
+$$
+h_{\U}(c) := \sup_{u \in \U} c\, u. 
+$$
+When used with a matrix argument, $h_{\U}(D)$ is understood as
+$$
+h_{\U}(D) := \begin{pmatrix}
+h_{\U}(e_1^T D) & \dots & h_{\U}(e_q^T D)
+\end{pmatrix}^T.
+$$
+Eventually, we use the following shorthand notations.
+A convex and compact set containing the origin as an interior point is called a C-set. 
+The matrix $I_p$ refers to the identity matrix in $\R^{p \times p}$. 
+
+\section{Preliminaries}
+
+
+\begin{defn}
+\label{def:RPI}
+Let $\X, \W^\ast \subseteq \R^n$ and $\alpha \in \R_+$.
+$\Pp$ is called robust positively invariant (RPI) for system~\eqref{eq:system} with constraints~\eqref{eq:constraints}, if (i) $\Pp \subseteq \X$ and (ii) $A\, x+w\in \Pp$ for every $x \in \Pp$ and every $w \in \W^\alpha$.
+\end{defn}
+
+Note that both the union and the intersection of two RPI sets result in another RPI set. Further note that $\Pp=\emptyset$ is a RPI set according to Def.~\ref{def:RPI}. Based on these observations, the following definitions of the maximal and minimal RPI set are reasonable. 
+
+\begin{defn}
+\label{def:MRPI}
+Let $\X, \W^\ast \subseteq \R^n$ and $\alpha \in \R_+$. The union of all RPI sets for~\eqref{eq:system} with~\eqref{eq:constraints} is called the maximal robust positively invariant (MRPI) set for~\eqref{eq:system} with~\eqref{eq:constraints} and denoted by $\Pp_{\max}^\alpha$.
+\end{defn}
+
+\begin{defn}
+\label{def:mRPI}
+Let $\X, \W^\ast \subseteq \R^n$ and $\alpha \in \R_+$. The intersection of all nonempty RPI sets and the MRPI set for~\eqref{eq:system} with~\eqref{eq:constraints} is called the minimal robust positively invariant (mRPI) set for~\eqref{eq:system} with~\eqref{eq:constraints} and denoted by $\Pp_{\min}^\alpha$.
+\end{defn}
+
+Two important statements can be inferred  from Defs.~\ref{def:MRPI} and \ref{def:mRPI}. First, $\Pp_{\min}^\alpha$ is empty if and only if $\Pp_{\max}^\alpha$ is empty. Second, $\Pp_{\min}^\alpha \subseteq \Pp_{\max}^\alpha$.
+
+\begin{assum}
+\label{assum:AXW}
+The eigenvalues $\lambda \in \C$ of the matrix $A \in \R^{n \times n}$ are strictly stable (i.e., $| \lambda|<1$).
+The sets $\X$ and $\W^\ast$ are C-sets in $\R^n$.
+\end{assum}
+
+
+\begin{equation}
+\label{eq:sequenceRk}
+\Rr_{k+1}^\alpha := A\, \Rr_k^\alpha \oplus \W^\alpha \qquad \text{with} \qquad  \Rr_{0}^\alpha:=\{0\}.
+\end{equation}
+
+We obviously have $\Rr_k^\alpha \subseteq \Rr_{k+1}^\alpha$.
+
+
+\begin{equation}
+\label{eq:sequenceSk}
+\Ss_{k+1}^\alpha := A^{-1} (\Ss_k^\alpha \ominus \W^\alpha) \cap \X \quad \text{with} \quad  \Ss_{0}^\alpha:=\X,
+\end{equation}
+
+We obviously have $\Ss_k^\alpha \supseteq \Ss_{k+1}^\alpha$.
+
+\begin{lem}
+\label{lem:xInSkAlpha}
+Let Assum.~\ref{assum:AXW} be satisfied, let  $k \in \N_+$ and $\alpha \in \R_+$, and let $x_0 \in \X$. Then $x_0 \in \Ss_k^\alpha$ if and only if
+$$
+A^j x_0 + \sum_{i=0}^{j-1} A^{j-1-i} w(i)  \in \X
+$$
+for every $j \in \N_{[1,k]}$ and every disturbance sequence $w(0),\dots, w(k-1) \in \W^{\alpha}$.
+\end{lem}
+
+\begin{equation}
+\label{eq:RLimit}
+\Rr_\infty^\alpha:=\lim_{k \rightarrow \infty} \Rr_k^\alpha =  \bigcup_{k=0}^\infty \Rr_k^\alpha
+\end{equation}
+
+\begin{equation}
+\label{eq:SLimit}
+\Ss_\infty^\alpha:=\lim_{k \rightarrow \infty} \Ss_k^\alpha  = \bigcap_{k=0}^\infty \Ss_k^\alpha 
+\end{equation}
+
+\begin{lem}
+\label{lem:PmaxPmin}
+Let Assum.~\ref{assum:AXW} be satisfied. Then, $\Pp_{\max}^\alpha=\Ss_\infty^\alpha$ and 
+\begin{equation}
+\label{eq:Pmin}
+\Pp_{\min}^\alpha=\left\{ \begin{array}{ll}
+\Rr_{\infty}^\alpha & \text{if} \quad \Rr_{\infty}^\alpha\subseteq \X, \\
+\emptyset & \text{otherwise}.
+\end{array} \right.
+\end{equation}
+\end{lem}
+
+From \cite[Eqs.~(5.1) and (5.2)]{Kolmanovsky1998}, we infer
+\begin{equation}
+\label{eq:relationSkRk}
+\Ss_{k}^\alpha = \bigcap_{j=0}^k (A^{j})^{-1} (\X \ominus \Rr_{j}^\alpha).
+\end{equation}
+Since the statement is not trivial a formal proof can be found in the appendix for completeness
+
+\begin{equation}
+\label{eq:relationSkRkPlus1}
+\Ss_{k+1}^\alpha = (A^{k+1})^{-1} (\X \ominus \Rr_{k+1}^\alpha) \cap \Ss_k^\alpha.
+\end{equation}
+
+\section{Parametric robust positively invariant sets}
+
+
+
+
+interval $\I \subset \R_+$
+
+\begin{equation}
+\label{YIk}
+\Y^{\I}_k := \left\{ \begin{pmatrix}
+x \\
+\alpha 
+\end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \Rr_k^\alpha,\,\,  \alpha \in \I \right\} 
+\end{equation}
+
+\begin{equation}
+\label{ZIk}
+\Z^{\I}_k := \left\{ \begin{pmatrix}
+x \\
+\alpha 
+\end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \Ss_k^\alpha,\,\, \alpha \in \I  \right\} 
+\end{equation}
+
+
+
+
+\begin{equation}
+\label{eq:criticalAlpha}
+\alpha^\ast :=  \sup_{\alpha} \,\alpha \quad \text{s.t.} \quad \alpha \, \Rr^1_\infty \subseteq \X
+\end{equation}
+
+
+\begin{thm}
+Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} $ and let $k \in \N_+$. Then, $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ is a compact, convex and full-dimensional set in $\R^{n+1}$.
+\end{thm}
+
+\begin{lem}
+\label{lem:YalphaConvY1}
+Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} $ and let $k \in \N_+$. Then,
+$
+\Y^{[\lb{\alpha},\ub{\alpha}]}_k = \conv \left\{ 
+\lb{\alpha}\,\Y^{1}_k , 
+\ub{\alpha}\,\Y^{1}_k 
+\right\}.
+$
+\end{lem}
+
+\begin{proof}
+Consider any $\alpha \in \R_+$ and note that
+\begin{equation}
+\label{eq:RkAlphaRk1}
+\Rr_k^\alpha= \bigoplus_{j=0}^{k-1} A^j \,\W^\alpha = \alpha \bigoplus_{j=0}^{k-1} A^j \,\W^\ast = \alpha \, \Rr_k^1.
+\end{equation}
+We consequently have $\Y^{\alpha}_k =\alpha\,\Y^{1}_k $, which immediately proves the claim.
+\end{proof}
+
+
+
+\begin{proof}
+The sets $\Rr_k^{1}$ are C-sets in $\R^n$ for every $k \in \N_+$. This observation in combination with Lem.~\ref{lem:YalphaConvY1} proves the claim.
+\end{proof}
+
+\begin{thm}
+Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} \leq \alpha^\ast$ and let $k \in \N$. Then, $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ is a compact, convex and full-dimensional set in $\R^{n+1}$.
+\end{thm}
+
+\begin{proof}
+The claim obviously holds for $k=0$ since $\Z^{[\lb{\alpha},\ub{\alpha}]}_0 = \X \times [\lb{\alpha},\ub{\alpha}]$ and since $\X$ is a C-set in $\R^n$ by assumption.
+For $k \in \N_+$, first note that $\Ss_k^{\alpha}$ is a compact, convex and full-dimensional set in $\R^n$ for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$ (due to $0<\lb{\alpha} < \ub{\alpha} \leq \alpha^\ast$). Since $[\lb{\alpha},\ub{\alpha}]$ is a compact and full-dimensional set in $\R$, it is clear that $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ is a compact and full-dimensional set in $\R^{n+1}$. It remains to show that $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ is convex. By definition, this is the case if
+\begin{equation}
+\label{eq:zHat}
+\hat{z}:=\xi z_1+(1-\xi) z_2 \in \Z^{[\lb{\alpha},\ub{\alpha}]}_k.
+\end{equation}
+for every $z_1,z_2 \in \Z^{[\lb{\alpha},\ub{\alpha}]}_k$ and $\xi \in [0,1]$. Clearly $z_1$ and $z_2$ can be decomposed as
+$$
+z_1 = \begin{pmatrix}
+x_1 \\
+\alpha_1
+\end{pmatrix},
+\quad 
+z_2 = \begin{pmatrix}
+x_2 \\
+\alpha_2
+\end{pmatrix}
+ \quad \text{and} \quad 
+\hat{z} = \begin{pmatrix}
+\hat{x} \\
+\hat{\alpha}
+\end{pmatrix}
+$$
+with $\alpha_1,\alpha_2,\hat{\alpha} \in \R_+$. We have $x_1 \in \Ss_k^{\alpha_1}$ and $x_2 \in \Ss_k^{\alpha_2}$ by construction.
+Analogously, \eqref{eq:zHat} holds if (and only if) $\hat{x} \in \Ss_k^{\hat{\alpha}}$. According to Lem.~\ref{lem:xInSkAlpha}, $\hat{x} \in \Ss_k^{\hat{\alpha}}$ if and only if
+$$
+A^j \hat{x} + \sum_{i=0}^{j-1} A^{j-1-i} \hat{w}(i)  \in \X
+$$
+for every $j \in \N_{[1,k]}$ and every disturbance sequence $\hat{w}(0),\dots, \hat{w}(k-1) \in \W^{\hat{\alpha}}$. Consider any such sequence and define
+\begin{equation}
+\label{eq:w12}
+w_1(i):= \frac{\alpha_1}{\hat{\alpha}} \,\hat{w}(i)
+\quad \text{and} \quad 
+w_2(i):= \frac{\alpha_2}{\hat{\alpha}} \,\hat{w}(i)
+\end{equation}
+for every $i \in \N_{[0,k-1]}$. By definition of $\W^\alpha$, it is easy to see that
+$$
+w_1(0),..., w_1(k-1) \in \W^{\alpha_1}
+\,\, \text{and} \,\,
+w_2(0),..., w_2(k-1) \in \W^{\alpha_2}.
+$$
+Due to $x_1 \in \Ss_k^{\alpha_1}$ and $x_2 \in \Ss_k^{\alpha_2}$, we thus have
+\begin{align}
+\label{eq:x1Sequence}
+A^j \,x_1 + \sum_{i=0}^{j-1} A^{j-1-i} \,w_1(i)  &\in \X  \quad \text{and}\\
+\label{eq:x2Sequence}
+A^j \,x_2 + \sum_{i=0}^{j-1} A^{j-1-i} \,w_2(i)  &\in \X
+\end{align}
+for every $j \in \N_{[1,k]}$  according to Lem.~\ref{lem:xInSkAlpha}.
+Now, \eqref{eq:zHat} obviously yields
+\begin{align}
+\label{eq:xHat}
+\hat{x} &=  \xi \,x_1 + (1-\xi) \,x_2 \quad \text{and}\\
+\label{eq:alphaHat}
+\hat{\alpha} &= \xi \,\alpha_1 + (1-\xi) \,\alpha_2.
+\end{align}
+Moreover, we find 
+\begin{equation}
+\label{eq:xiW12}
+\xi w_1(i) + (1-\xi) \,w_2(i) = \frac{\xi \alpha_1 + (1-\xi) \alpha_2}{\hat{\alpha}} \, \hat{w}(i) =\! \hat{w}(i)\!
+\end{equation}
+due to~\eqref{eq:w12} and \eqref{eq:alphaHat}, respectively.
+Equations \eqref{eq:x1Sequence}, \eqref{eq:x1Sequence}, and \eqref{eq:xiW12} in combination with convexity of $\X$ finally prove the second relation in~\eqref{eq:zHat}.
+%choose any $\alpha_1,\alpha_2 \in [\lb{\alpha},\ub{\alpha}]$ with $\alpha_1 \leq \alpha_2$, $x_1 \in \Ss_k^{\alpha_1}$, and $x_2 \in \Ss_k^{\alpha_2}$. Let $\xi \in [0,1]$ and consider $\hat{x} = \xi \,x_1 + (1-\xi) \, x_2$ and $\hat{\alpha}=\xi \alpha_1 + (1-\xi) \, \alpha_2$. Then $\hat{x} \in \Ss_k^{\hat{\alpha}}$ and consequently 
+%$$
+%\begin{pmatrix}
+%\hat{x} \\
+%\hat{\alpha}
+%\end{pmatrix} \in \Z^{[\lb{\alpha},\ub{\alpha}]}_k.
+%$$
+%To see this, assume that $\hat{x} \notin \Ss_k^{\hat{\alpha}}$
+%
+%$\Ss_k^{\alpha_1} \supseteq \Ss_k^{\hat{\alpha}} \supseteq  \Ss_k^{\alpha_2}$. Thus $x_2 \in \Ss_k^{\hat{\alpha}}$.
+%Having $\hat{x} \notin \Ss_k^{\hat{\alpha}}$ consequently implies $x_1  \notin \Ss_k^{\hat{\alpha}}$ since $\Ss_k^{\hat{\alpha}}$ is convex.
+\end{proof}
+
+the limit $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is finitely determined, i.e., there exists a finite $N \in \N$ such that
+
+
+\begin{thm}
+Let Assum.~\ref{assum:AXW} be satisfied, let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha}$, and let $\epsilon \in \R_+$. Assume $M \in \N$ is such that
+ \begin{equation}
+\label{eq:conditionYEpsApproximation}
+A^{M} \W^\ast \subseteq \mu \,\W^\ast \quad \text{with} \quad \mu:=\frac{\epsilon}{1+\epsilon}.
+\end{equation}
+ Then,  $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq \Gamma\,\Y^{[\lb{\alpha},\ub{\alpha}]}_M $, where
+ $$
+ \Gamma := \begin{pmatrix}
+ (1+\epsilon) I_n & 0 \\ 0 & 1
+ \end{pmatrix} \in \R^{(n+1) \times (n+1)}.
+ $$
+\end{thm}
+
+\begin{proof}
+According to \cite[Thm.~1]{Rakovic2005}, \eqref{eq:conditionYEpsApproximation} yields
+\begin{equation}
+\label{eq:RInfty1EpsApproximation}
+\Rr_\infty^1 \subseteq \frac{1}{1-\mu} \Rr_M^1 = (1+\epsilon) \, \Rr_M^1.
+\end{equation}
+Following~\eqref{eq:RkAlphaRk1}, relation~\eqref{eq:RInfty1EpsApproximation} implies
+$$
+\Rr_\infty^\alpha \subseteq  (1+\epsilon) \, \Rr_M^\alpha \quad \text{for every} \quad \alpha \in [\lb{\alpha},\ub{\alpha}].
+$$
+Obviously, $\Rr_\infty^\alpha \subseteq  (1+\epsilon) \, \Rr_M^\alpha $ can equivalently be stated as $
+\Rr_\infty^\alpha \subseteq  (1+\epsilon) \,I_p\, \Rr_M^\alpha$ 
+\end{proof}
+
+
+\begin{thm}
+Let Assum.~\ref{assum:AXW} be satisfied and let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} < \alpha^\ast$. Assume $N \in \N$ is such that
+ \begin{equation}
+\label{eq:conditionZFinitelyDetermined}
+A^{N+1} \X \subseteq \eta \,\X \quad \text{with} \quad \eta:=1-\frac{\ub{\alpha}}{\alpha^\ast}.
+\end{equation}
+ Then,  $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty = \Z^{[\lb{\alpha},\ub{\alpha}]}_N $.
+\end{thm}
+
+
+
+%\begin{thm}
+%Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} < \alpha^\ast$. Then, the limit $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is finitely determined, i.e., there exists a finite $N \in \N$ such that $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty = \Z^{[\lb{\alpha},\ub{\alpha}]}_N $.
+%\end{thm}
+
+\begin{proof}
+We have $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty = \Z^{[\lb{\alpha},\ub{\alpha}]}_N $ if (and only if) 
+\begin{equation}
+\label{eq:ZNPlus1EqualsZN}
+\Z^{[\lb{\alpha},\ub{\alpha}]}_{N+1}= \Z^{[\lb{\alpha},\ub{\alpha}]}_N.
+\end{equation}
+Condition~\eqref{eq:ZNPlus1EqualsZN} holds 
+ if (and only if) 
+\begin{equation}
+\label{eq:SNPlus1EqualsSN}
+ \Ss_{N+1}^\alpha = \Ss_{N}^\alpha \quad \text{for every} \quad \alpha \in [\lb{\alpha},\ub{\alpha}].
+\end{equation}
+  Now, from relation~\eqref{eq:relationSkRkPlus1}, it is easy to see that~\eqref{eq:SNPlus1EqualsSN} holds if (and only if)
+ \begin{equation}
+\label{eq:exactConditionZFinitelyDetermined}
+  A^{N+1} \Ss_N^\alpha \subseteq \X \ominus \Rr_{N+1}^\alpha \quad \text{for every} \quad \alpha \in [\lb{\alpha},\ub{\alpha}].
+\end{equation}
+We next show that~\eqref{eq:exactConditionZFinitelyDetermined} holds if 
+ \begin{equation}
+\label{eq:auxiliaryConditionZFinitelyDetermined}
+A^{N+1} \X \subseteq \X \ominus \Rr^{\ub{\alpha}}_\infty.
+\end{equation}
+To see this, note that  $A^{N+1} \Ss_N^\alpha \subseteq  A^{N+1} \Ss_N^{\lb{\alpha}} \subseteq A^{N+1} \X$ and $ \X \ominus \Rr_{N+1}^\alpha \supseteq \X \ominus \Rr_{N+1}^{\ub{\alpha}} \supseteq \X \ominus \Rr_{\infty}^\alpha $ for every $ \alpha \in [\lb{\alpha},\ub{\alpha}]$.
+The r.h.s.~in \eqref{eq:auxiliaryConditionZFinitelyDetermined} can be further underestimated. In fact, due to $0<\ub{\alpha} < \alpha^\ast$, we have 
+$$
+\X \ominus \Rr^{\ub{\alpha}}_\infty \supseteq \eta \,\X  \quad \text{with} \quad \eta:=1-\frac{\ub{\alpha}}{\alpha^\ast} \in (0,1)
+$$
+according to~\eqref{eq:criticalAlpha} and \cite[Rem.~2.1]{Kolmanovsky1998}. Thus, \eqref{eq:auxiliaryConditionZFinitelyDetermined} and consequently~\eqref{eq:ZNPlus1EqualsZN} holds, if~\eqref{eq:conditionZFinitelyDetermined} is fulfilled.
+\end{proof}
+
+\begin{rem}
+Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproximation} and~\eqref{eq:conditionZFinitelyDetermined}, respectively, can always be found since both $\mu$ and $\eta$ lie in the interval $(0,1)$, since the eigenvalues of $A$ are strictly stable, and since $\X$ is a C-set according to Assum.~\ref{assum:AXW}. Assume, for example, that $\lb{r},\ub{r} \in \R_+$ denote the radii of a ball that is contained in $\W^\ast$ and a ball that contains $\W^\ast$, respectively. Then, \eqref{eq:conditionYEpsApproximation} holds if 
+$$
+\|A^M\|_2 \leq \frac{\mu \,\lb{r}}{\ub{r}}. 
+$$ 
+\end{rem}
+
+
+\section{Iterative computation of parametric sets}
+
+
+$$
+h_{\W^\alpha}(c) = \sup_{w^\ast \in \W^\ast} \! c \,w^\ast = \alpha \sup_{w^\ast \in \W^\ast} \! c \, w^\ast = \alpha \, h_{\W^\ast}(c)
+$$
+
+$$
+\Ss_k^\alpha = \left\{ x \in \R^n \,|\, H A^j x \leq d - \alpha\,\sum_{i=0}^{j-1} h_{\W^\ast} (H A^i), \, j \in \N_{[0,k]} \right\}
+$$
+
+\begin{align}
+\nonumber
+\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \{ z \in \R^{n+1} \,|\, \begin{pmatrix} H A^j & \sum_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq \boldsymbol{1}, \quad\\
+\nonumber
+ j \in \N_{[0,k]}, \lb{\alpha} \leq z_{n+1} \leq \ub{\alpha} \}
+\end{align}
+
+$\Psi(H)$
+
+\section{Approximation of the critical scaling}
+
+$$
+\hat{\alpha}^\ast 
+$$
+
+\section{Numerical examples}
+
+\cite[Exmp.~6.10]{Blanchini2008}
+
+$A=0.5$, $\W^\ast=[-1,1]$ and $\X=[-2,2]$
+
+
+ \cite[Sect.~4.1]{Mayne2005} 
+
+$\begin{pmatrix}
+\blind{+}0.6696 & \blind{+}0.3369  \\ -0.6609 & -0.3261
+\end{pmatrix}$  
+
+
+  $\begin{array}{rl}
+-50\!\!\! &\leq x_2 \leq 2 \\
+-1\!\!\! &\leq K x \leq 1
+\end{array}$  
+
+ $\|w\|_\infty \leq 0.1$  
+ 
+  $3.362391$    $3.362728$
+
+\section{Conclusion and outlook}
+\label{sec:conclusionOutlook}
+
+
+
+
+
+
+\bibliographystyle{ieeetr}
+%\bibliographystyle{plain}        % Include this if you use bibtex 
+\bibliography{msdLiterature} 
+
+\appendix
+
+\begin{lem}
+\label{lem:PmaxPmin}
+Let Assum.~\ref{assum:AXW} be satisfied, let $\alpha \in \R_+$, and let $k \in \N$. Then, the set $\Ss_k^\alpha$ defined by the sequence~\eqref{eq:sequenceSk} can be expressed as in~\eqref{eq:relationSkRk}.
+\end{lem}
+
+\begin{proof}
+We prove the claim by induction. Relation~\eqref{eq:relationSkRk} obviously holds for $k = 0$ since obtain $\Ss_0^\alpha = \X$ as in~\eqref{eq:sequenceSk}. It remains to show that~\eqref{eq:relationSkRk} implies
+\begin{equation}
+\label{eq:inductionStep}
+\Ss_{k+1}^\alpha = \bigcap_{j=0}^{k+1} (A^{j})^{-1} (\X \ominus \Rr_{j}^\alpha).
+\end{equation}
+To this end, first note that~\eqref{eq:sequenceSk}  in combination with \eqref{eq:relationSkRk} yields
+\begin{equation}
+\label{eq:SkPlus1Rewritten}
+\Ss_{k+1}^\alpha = A^{-1} \! \left( \left(\bigcap_{j=0}^k (A^{j})^{-1} (\X \ominus \Rr_{j}^\alpha) \right) \ominus \W^\alpha\right) \cap \X
+\end{equation}
+Now, the r.h.s.~in~\eqref{eq:SkPlus1Rewritten} can be rewritten as 
+\begin{align}
+\nonumber
+&A^{-1} \!\left( \bigcap_{j=0}^k (A^{j})^{-1} (\X \ominus \Rr_{j}^\alpha \ominus A^j  \W^\alpha )  \right) \cap \X \\
+\nonumber
+&= \left( \bigcap_{j=0}^k (A^{j+1})^{-1} (\X \ominus \Rr_{j}^\alpha \ominus A^j  \W^\alpha )  \right) \cap \X \\
+\nonumber
+&=  \left( \bigcap_{j=1}^{k+1} (A^{j})^{-1} (\X \ominus \Rr_{j+1}^\alpha \ominus A^{j+1}  \W^\alpha )  \right) \cap \X 
+\end{align}
+Since $\Rr_{j+1}^\alpha \ominus A^{j+1}  \W^\alpha = \Rr_{j}^\alpha$ for every $j \in \N$ due to convexity and compactness of $\Rr_{j+1}^\alpha$, $A^{j+1}  \W^\alpha$, and $\Rr_{j}^\alpha$  (see \cite[p. 325]{Kolmanovsky1998}), we finally obtain
+\begin{equation}
+\label{eq:finalLine}
+\Ss_{k+1}^\alpha = \left( \bigcap_{j=1}^{k+1} (A^{j})^{-1} (\X \ominus \Rr_{j}^\alpha )  \right) \cap \X 
+\end{equation}
+Clearly, \eqref{eq:inductionStep} and~\eqref{eq:finalLine} are equivalent.
+\end{proof}
+
+
+
+\end{document}
