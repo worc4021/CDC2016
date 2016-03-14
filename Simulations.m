@@ -122,7 +122,7 @@ LambdaLifted = [Lambda,zeros(size(Lambda,1),1);
                 zeros(2),[-1;approxAlphaStar(Lambda,A,D,G,200,1e-16)]];
 lambdaLifted = [lambda;0;1];
 
-% [TermA,TermB,iters] = MRPIFullDimDist(LambdaLifted,lambdaLifted,G,A,D,200,'Mayne Example');
+[TermA,TermB,iters] = MRPIFullDimDist(LambdaLifted,lambdaLifted,G,A,D,200,'Mayne Example');
 
 Num = 3;
 InvSetA = cell(1,Num);
@@ -159,3 +159,8 @@ figure(3)
 fill(V{3}(k{3},1),V{3}(k{3},2),CM(1,:),'FaceAlpha',1)
 xlabel('$x_1$')
 ylabel('$x_2$')
+
+figure(4)
+VV = vertexEnumeration(TermA,TermB);
+kk = convhull(VV(:,1),VV(:,2),VV(:,3),'simplify', true);
+fill3(VV(kk,1),VV(kk,2),VV(kk,3),CM(1,:))
