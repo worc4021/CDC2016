@@ -1,4 +1,4 @@
-function [Aout,bout,i] = MRPIfixedAlpha(Ain,bin,A,D,G,iMax,alpha)
+function [Aout,bout,iter] = MRPIfixedAlpha(Ain,bin,A,D,G,iMax,alpha)
 
 Lambda = Ain;
 lambda = bin;
@@ -13,15 +13,15 @@ model = struct('A',G,...
             'modelsense','max');
 param = struct('OutputFlag', 0);
 
-i = 1;
-while and(~isContained(Lambda,lambda,LambdaNext,lambdaNext),i<iMax)
+iter = 1;
+while and(~isContained(Lambda,lambda,LambdaNext,lambdaNext),iter<iMax)
     
-    if mod(i,10) == 0
+    if mod(iter,10) == 0
         clc
-        fprintf('Currently at iteration %d, there are currently %d constraints\n',i,length(lambda))
+        fprintf('Currently at iteration %d, there are currently %d constraints\n',iter,length(lambda))
     end
     
-    if i~=1
+    if iter~=1
         Lambda = LambdaNext;
         lambda = lambdaNext;
     end
@@ -37,7 +37,7 @@ while and(~isContained(Lambda,lambda,LambdaNext,lambdaNext),i<iMax)
     
     [LambdaNext,lambdaNext] = bigReduce([Lambda;LambdaNext],...
         [lambda;lambdaNext]);
-    i = i+1;
+    iter = iter+1;
 
 end
 

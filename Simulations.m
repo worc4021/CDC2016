@@ -1,6 +1,6 @@
-% clear
-% close all
-% clc
+clear
+close all
+clc
 % 
 % tol = 1e-15;
 % 
@@ -123,6 +123,7 @@ LambdaLifted = [Lambda,zeros(size(Lambda,1),1);
 lambdaLifted = [lambda;0;1];
 
 [TermA,TermB,iters] = MRPIFullDimDist(LambdaLifted,lambdaLifted,G,A,D,200,'Mayne Example');
+display(iters)
 
 Num = 3;
 InvSetA = cell(1,Num);
@@ -163,4 +164,11 @@ ylabel('$x_2$')
 figure(4)
 VV = vertexEnumeration(TermA,TermB);
 kk = convhull(VV(:,1),VV(:,2),VV(:,3),'simplify', true);
-fill3(VV(kk,1),VV(kk,2),VV(kk,3),CM(1,:))
+hold on
+for i = 1:size(kk,1)
+    fill3(VV(kk(i,:),1),VV(kk(i,:),2),VV(kk(i,:),3),CM(1,:),'FaceAlpha',1,'LineStyle',':')
+end
+xlabel('$x_1$')
+ylabel('$x_2$')
+zlabel('$\alpha$')
+hold off
