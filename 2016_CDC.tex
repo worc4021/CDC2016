@@ -33,8 +33,8 @@
 \usepackage{epstopdf}
 \usepackage{booktabs}
 \usepackage{tikz}
-\usepackage{tikz-3dplot}
 \usetikzlibrary{arrows,positioning,patterns,decorations.pathreplacing}
+\usepackage{tikz-3dplot}
 
 \newcommand{\subparagraph}{}
 
@@ -98,6 +98,7 @@
 \newcommand{\Q}{\mathcal{Q}} 
 \newcommand{\Y}{\mathcal{Y}}
 \newcommand{\Z}{\mathcal{Z}}
+\newcommand{\M}{\mathcal{M}}
 
 \newcommand{\conv}{\mathrm{conv}}
 
@@ -203,7 +204,7 @@ The matrix $I_p$ refers to the identity matrix in $\R^{p \times p}$.
 \begin{defn}
 \label{def:RPI}
 Let $\X, \W^\ast \subseteq \R^n$ and $\alpha \in \R_+$.
-$\Pp$ is called robust positively invariant (RPI) for system~\eqref{eq:system} with constraints~\eqref{eq:constraints}, if (i) $\Pp \subseteq \X$ and (ii) $A\, x+w\in \Pp$ for every $x \in \Pp$ and every $w \in \W^\alpha$.
+The set $\Pp$ is called robust positively invariant (RPI) for system~\eqref{eq:system} with constraints~\eqref{eq:constraints}, if (i) $\Pp \subseteq \X$ and (ii) $A\, x+w\in \Pp$ for every $x \in \Pp$ and every $w \in \W^\alpha$.
 \end{defn}
 
 Note that both the union and the intersection of two RPI sets result in another RPI set. Further note that $\Pp=\emptyset$ is a RPI set according to Def.~\ref{def:RPI}. Based on these observations, the following definitions of the maximal and minimal RPI set are reasonable. 
@@ -286,11 +287,14 @@ Since the statement is not trivial a formal proof can be found in the appendix f
 \end{equation}
 
 \section{Parametric robust positively invariant sets}
-
+\label{sec:parametricRPIsets}
 
 
 
 interval $\I \subset \R_+$
+
+
+
 
 \begin{equation}
 \label{YIk}
@@ -308,6 +312,13 @@ x \\
 \end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \Ss_k^\alpha,\,\, \alpha \in \I  \right\} 
 \end{equation}
 
+%\begin{equation}
+%\label{XI}
+%\Cc^{\I} := \left\{ \begin{pmatrix}
+%x \\
+%\alpha 
+%\end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \X,\,\,  \alpha \in \I \right\} 
+%\end{equation}
 
 
 
@@ -430,19 +441,35 @@ Equations \eqref{eq:x1Sequence}, \eqref{eq:x1Sequence}, and \eqref{eq:xiW12} in 
 
 the limit $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is finitely determined, i.e., there exists a finite $N \in \N$ such that
 
+As a preperation, we introduce the scaling matrix
+ $$
+ E^\epsilon := \begin{pmatrix}
+ (1+\epsilon) I_n & 0 \\ 0 & 1
+ \end{pmatrix} \in \R^{(n+1) \times (n+1)}
+ $$ 
+for some $\epsilon \in \R_+$ and the projection matrix
+$$
+P:=\begin{pmatrix}
+  I_n & 0 
+ \end{pmatrix} \in \R^{n \times (n+1)}.
+ $$
 
 \begin{thm}
-Let Assum.~\ref{assum:AXW} be satisfied, let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha}$, and let $\epsilon \in \R_+$. Assume $M \in \N$ is such that
+\label{thm:outerApproxYinfI}
+Let Assum.~\ref{assum:AXW} be satisfied, let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha}< \alpha^\ast$, and let $\epsilon \in \R_+$.
+ Assume $M \in \N$ is such that
  \begin{equation}
 \label{eq:conditionYEpsApproximation}
 A^{M} \W^\ast \subseteq \mu \,\W^\ast \quad \text{with} \quad \mu:=\frac{\epsilon}{1+\epsilon}.
 \end{equation}
- Then,  $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq \Gamma\,\Y^{[\lb{\alpha},\ub{\alpha}]}_M $, where
- $$
- \Gamma := \begin{pmatrix}
- (1+\epsilon) I_n & 0 \\ 0 & 1
- \end{pmatrix} \in \R^{(n+1) \times (n+1)}.
- $$
+ Then,
+$\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq E^\epsilon\Y^{[\lb{\alpha},\ub{\alpha}]}_M$.
+ Moreover, if
+ \begin{equation}
+\label{eq:boundOnEpsilon}
+\epsilon \leq \frac{\alpha^\ast}{\ub{\alpha}}-1,
+\end{equation}
+ $P E^\epsilon \Y^{\alpha}_M$ is an RPI set for~\eqref{eq:system} with~\eqref{eq:constraints} for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$. 
 \end{thm}
 
 \begin{proof}
@@ -457,6 +484,10 @@ $$
 $$
 Obviously, $\Rr_\infty^\alpha \subseteq  (1+\epsilon) \, \Rr_M^\alpha $ can equivalently be stated as $
 \Rr_\infty^\alpha \subseteq  (1+\epsilon) \,I_p\, \Rr_M^\alpha$ 
+which proves $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq E^\epsilon\Y^{[\lb{\alpha},\ub{\alpha}]}_M$. To see that \eqref{eq:boundOnEpsilon} implies that $P E^\epsilon \Y^{\alpha}_M$ is an RPI set  for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$, first note that $P E^\epsilon \Y^{\alpha}_M = (1+\epsilon) \Rr_M^\alpha$. Clearly, $(1+\epsilon) \Rr_M^\alpha \subseteq \X$ due to $\alpha \leq \ub{\alpha} < \alpha^\ast$ and~\eqref{eq:boundOnEpsilon}. Moreover, according to the proof of \cite[Thm.~1]{Rakovic2005}, \eqref{eq:conditionYEpsApproximation} implies 
+$$ (1+\epsilon) A \, \Rr_M^\alpha \oplus \W^\alpha \subseteq (1+\epsilon) \Rr_M^\alpha,
+$$
+which proves that $(1+\epsilon) \Rr_M^\alpha$ is an RPI set  for~\eqref{eq:system} with~\eqref{eq:constraints} according to Def.~\ref{def:RPI}.
 \end{proof}
 
 
@@ -470,7 +501,7 @@ Let Assum.~\ref{assum:AXW} be satisfied and let $\lb{\alpha},\ub{\alpha}\in \R_+
 \label{eq:conditionZFinitelyDetermined}
 A^{N+1} \X \subseteq \eta \,\X \quad \text{with} \quad \eta:=1-\frac{\ub{\alpha}}{\alpha^\ast}.
 \end{equation}
- Then,  $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty = \Z^{[\lb{\alpha},\ub{\alpha}]}_N $.
+ Then,  $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty = \Z^{[\lb{\alpha},\ub{\alpha}]}_N $. Moreover,   $P \Z^{\alpha}_N$ is the MRPI set for~\eqref{eq:system} with~\eqref{eq:constraints} for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$. 
 \end{thm}
 
 
@@ -509,12 +540,22 @@ $$
 according to~\eqref{eq:criticalAlpha} and \cite[Rem.~2.1]{Kolmanovsky1998}. Thus, \eqref{eq:auxiliaryConditionZFinitelyDetermined} and consequently~\eqref{eq:ZNPlus1EqualsZN} holds, if~\eqref{eq:conditionZFinitelyDetermined} is fulfilled.
 \end{proof}
 
+%It is important to note that the set $\Gamma\,\Y^{[\lb{\alpha},\ub{\alpha}]}_M $ from Thm.~\ref{thm:outerApproxYinfI} is
+%
+%\begin{align}
+%\label{eq:sequenceTk}
+%\T_{k+1}^\alpha &:= A^{-1} (\T_k^\alpha \ominus \W^\alpha) \cap \X \quad  \text{with} \\  
+%\T_{0}^\alpha &:=\X \cap (1+\epsilon) \,\Rr_M^\alpha ,
+%\end{align}
+%
+%
+%$$
+%\M^{\I}_k := \left\{ \begin{pmatrix}
+%x \\
+%\alpha 
+%\end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \T_k^\alpha,\,\, \alpha \in \I  \right\} 
+%$$
 
-
-\begin{equation}
-\label{eq:sequenceTk}
-\T_{k+1} \!:= \!A^{-1} (\T_k \ominus \W^\ast) \cap \X \,\, \text{with} \,\,  \T_{0}\!:=\X \cap (1+\epsilon) \Rr_M^1 ,
-\end{equation}
 
 \begin{rem}
 Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproximation} and~\eqref{eq:conditionZFinitelyDetermined}, respectively, can always be found since both $\mu$ and $\eta$ lie in the interval $(0,1)$, since the eigenvalues of $A$ are strictly stable, and since $\X$ is a C-set according to Assum.~\ref{assum:AXW}. Assume, for example, that $\lb{r},\ub{r} \in \R_+$ denote the radii of a ball that is contained in $\W^\ast$ and a ball that contains $\W^\ast$, respectively. Then, \eqref{eq:conditionYEpsApproximation} holds if 
@@ -528,47 +569,79 @@ $$
 
 
 
-\section{Approximation of the critical scaling}
+\subsection{Approximation of the critical scaling}
 
+Accurate approximation of critical scaling $\alpha^\ast$ for a user-defined error bound $\epsilon \in \R_+$.
+
+\begin{thm}
+Let Assum.~\ref{assum:AXW} be satisfied and let $\epsilon \in \R_+$.
+ Assume $M \in \N$ is such that~\eqref{eq:conditionYEpsApproximation} holds and define
+ \begin{equation}
+\label{eq:criticalAlphaApprox}
+\hat{\alpha}^\ast :=  \max_{\alpha} \,\alpha \quad \text{s.t.} \quad \alpha \, (1+\epsilon)\, \Rr^1_M \subseteq \X.
+\end{equation}
+Then, $\hat{\alpha}^\ast \leq \alpha^\ast \leq (1+\epsilon)\, \hat{\alpha}^\ast$.
+\end{thm}
+
+\begin{proof}
+Analogously to the proof of Thm.~\ref{thm:outerApproxYinfI}, satisfaction of \eqref{eq:conditionYEpsApproximation} yields
+\eqref{eq:RInfty1EpsApproximation}. In combination with~\eqref{eq:criticalAlphaApprox}, we thus obtain $ \hat{\alpha}^\ast\,\Rr_\infty^1 \subseteq  \hat{\alpha}^\ast (1+\epsilon) \, \Rr_M^1 \subseteq \X$ which implies $\hat{\alpha}^\ast \leq \alpha^\ast $ according to~\eqref{eq:criticalAlpha}. Similarly, we have $\alpha^\ast \,\Rr_M^1 \subseteq \alpha^\ast \,\Rr_\infty^1 \subseteq \X$ by construction and thus $\alpha^\ast \leq (1+\epsilon)\, \hat{\alpha}^\ast$.
+\end{proof}
+
+
+\section{Computation and numerical examples}
+
+In Sect.~\ref{sec:parametricRPIsets}, we discussed properties of parametric RPI sets and the approximation of the critical scaling $\alpha^\ast$ for general C-sets $\X$ and $\W^\ast$.
+However, the actual computation of the sets $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ and $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ and the approximation of $\alpha^\ast$ is demanding for this general setup. 
+We thus consider polytopic sets $\X$ and $\W^\ast$ to illustrate the  findings in Sect.~\ref{sec:parametricRPIsets}. 
+In this case, it is well-known that the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ are  polytopes as well.
+As for $\Rr_k^\alpha$, this observation immediately follows from~\eqref{eq:RkAlphaRk1}. Regarding $\Ss_k^\alpha$, we first
+assume that the state constraints $\X$ are given by
 $$
-\hat{\alpha}^\ast 
+\X = \{ x \in \R^n \,|\, H x \leq d \}
 $$
-
-
-\section{Computation for polytopic sets}
-
-
-
-
-
-
-polytope
-
-$$
-\Ss_k^\alpha = \bigg\{ x \in \R^n \,\bigg|\, H A^j x \leq d - \sum_{i=0}^{j-1} h_{\W^\alpha} (H A^i), \, \forall j \in \N_{[0,k]} \bigg\}
-$$
-
-$$
-h_{\W^\alpha}(c) = \sup_{w \in \W^\alpha} \! c \,w = \alpha \sup_{w^\ast \in \W^\ast} \! c \, w^\ast = \alpha \, h_{\W^\ast}(c)
-$$
-
-
+with $H \in \R^{L \times n}$ and $d \in \R^L$.
+Then,  the sets $\Ss_k^\alpha$ can be expressed as
+\begin{equation}
+\label{eq:SkPolytope}
+\!\,\Ss_k^\alpha \!=\! \bigg\{ \!x \!\in\! \R^n \bigg| H A^j x \leq d -\! \sum_{i=0}^{j-1} \!h_{\W^\alpha}\!\,(H A^i), \, \forall j \! \in \! \N_{[0,k]} \!\bigg\}\!\!\!\!\!
+\end{equation}
+according to \cite[p. 342]{Kolmanovsky1998}.
+Thereby, the term $h_{\W^\alpha} (H A^i)$ can be computed by solving $L$ linear programs. 
+Having polytopic sets $\Rr_k^\alpha$ and taking Lem.~\ref{lem:YalphaConvY1} into account, immediately implies that $
+\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ is a polytope.
+To see that $
+\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ is polytopic as well, first note that
+\begin{equation}
+\label{eq:hWalpha}
+h_{\W^\alpha}(c) = \sup_{w \in \W^\alpha}  c \,w = \alpha \sup_{w^\ast \in \W^\ast}  c \, w^\ast = \alpha \, h_{\W^\ast}(c)
+\end{equation}
+for any $c \in \R^{1 \times n}$.
+Using~\eqref{eq:hWalpha} in~\eqref{eq:SkPolytope} and substituting the result in~\eqref{ZIk} yields
 \begin{align}
 \nonumber
-\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \Big\{ z \in \R^{n+1} \,\Big|\, \begin{pmatrix} H A^j & \sum \limits_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq d, \,\,\,\\
-\nonumber
-\lb{\alpha} \leq z_{n+1} \leq \ub{\alpha},  \,\, \forall  j \in \N_{[0,k]}, \Big\}
+\!\!\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \bigg \{ z \in \R^{n+1} \,\bigg|\, \begin{pmatrix} H A^j & \sum \limits_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq d, \!\!\!\!\!\!\\
+\label{eq:ZkPolytope}
+\lb{\alpha} \leq z_{n+1} \leq \ub{\alpha},  \, \forall  j \in \N_{[0,k]} \bigg\} \quad  \!\!\!\!\!
 \end{align}
+after some basic manipulations.
+Clearly, $\Z_k^{[\lb{\alpha},\ub{\alpha}]}$ as in~\eqref{eq:ZkPolytope} is a polytope. 
+This observation is discussed in more detail in~\cite{Schaich2015}.
 
-$\Psi(H)$
 
 
-\section{Numerical examples}
+\subsection{Example 1}
 
-\cite[Exmp.~6.10]{Blanchini2008}
+We first consider system~\eqref{eq:system} with 
+$A=0.5$
+and the constraints $\X=[-2,2]$ and $\W^\ast=[-1,1]$. This one-dimensional example (without state constraints) was also analyzed in \cite[Exmp.~6.10]{Blanchini2008}.
 
-$A=0.5$, $\W^\ast=[-1,1]$ and $\X=[-2,2]$
+Since
+$$
+\epsilon \leq \frac{\hat{\alpha}^\ast}{\ub{\alpha}}-1  \leq \frac{\alpha^\ast}{\ub{\alpha}}-1,
+$$
 
+\subsection{Example 2}
 
  \cite[Sect.~4.1]{Mayne2005} 
 
@@ -578,7 +651,7 @@ $\begin{pmatrix}
 
 
   $\begin{array}{rl}
--50\!\!\! &\leq x_2 \leq 2 \\
+-4\!\!\! &\leq x_2 \leq 2 \\
 -1\!\!\! &\leq K x \leq 1
 \end{array}$  
 
