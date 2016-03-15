@@ -41,10 +41,9 @@ This confirms that in general a statement similar to Lemma~\ref{lem:YalphaConvY1
 \draw[latex'-] (-1.2,1) to[out=135,in=0] (-2,1.5) node[left] {$\mathcal R_4^1$};
 \draw[dashed] (-2,-.1) node[below] {$-2$} -- (-2,1.2);
 \draw[dashed] (2,-.1) node[below] {$2$} -- (2,1.2);
+\fill[gray!30] (.4263,.2) -- (1.705,.8) -- (-1.705,.8) -- (-.4263,.2) -- cycle;
+\draw[dashed,blue] (-1.55,.8) -- (-.3875,.2) -- (.3875,.2) -- (1.55,.8) -- cycle;
 \draw[dotted] (2,1) -- (0,0) -- (-2,1);
-\draw (-1.55,.8) -- (-.3875,.2);
-\draw (1.55,.8) -- (.3875,.2);
-\fill[pattern = north east lines, opacity=0.8] (.4263,.2) -- (1.705,.8) -- (-1.705,.8) -- (-.4263,.2) -- cycle;
 \draw (.4263,.2) -- (1.705,.8) -- (-1.705,.8) -- (-.4263,.2) -- cycle;
 \draw[latex'-] (.5,.6) to[out=60,in=180] (1,1.5) node[right] {$(1+\epsilon)\mathcal Y_4^{[0.2,0.8]}$};
 \draw[latex'-] (.2,.1) to[out=0,in=90] (.7,-.1) node[below] {$\alpha\mathcal R_\infty^1$};
@@ -52,10 +51,10 @@ This confirms that in general a statement similar to Lemma~\ref{lem:YalphaConvY1
 }\\
 \subfloat[$\mathcal Z_1^{[0.2,0.8]}=\mathcal Z_\infty^{[0.2,0.8]}$]{%
 \begin{tikzpicture}[scale=1.1]
+	\fill[gray!30] (-2,.2) -- (2,.2) -- (2,.8) -- (-2,.8) -- cycle;
 	\draw[-latex'] (0,0) node[below] {$0$} -- (0,2) node[right] {$\alpha$};
 	\draw[-latex'] (-2.2,0) -- (2.2,0) node[right] {$x$};
-	\fill[pattern = north east lines, opacity=0.8] (-2,.2) -- (2,.2) -- (2,.8) -- (-2,.8) -- cycle;
-	\draw[thick] (-2,.2) -- (2,.2) -- (2,.8) -- (-2,.8) -- cycle;
+	\draw (-2,.2) -- (2,.2) -- (2,.8) -- (-2,.8) -- cycle;
 	\draw (2,0) -- (2,1);
 	\draw (.1,1) -- (-.1,1) node[above right] {$1$};
 	\draw[dashed] (-2,-.1) node[below] {$-2$} -- (-2,1.2);
