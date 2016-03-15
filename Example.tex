@@ -11,9 +11,9 @@ First we consider the scalar system presented in~\cite[Exmp.~6.10]{Blanchini2008
 %
 where the state is constrained to the interval~$\X=[-2,2]$ and the disturbance has the nominal amplitude~$\W^\ast=[-1,1]$.
 %
-In this case the critical alpha can be explicitly calculated to be~$\alpha^\ast=1$ and both $\mathcal Z_\infty^{[0,\alpha^\ast]}$ and $\mathcal Y_\infty^{[0,\alpha^\ast]}$ can be explicitly determined.
+In this case the critical alpha can be calculated to be~$\alpha^\ast=1$ and both $\mathcal Z_\infty^{[0,\alpha^\ast]}$ and $\mathcal Y_\infty^{[0,\alpha^\ast]}$ can be explicitly determined.
 %
-Although we can explicitly calculate $\mathcal Y_\infty^{[0,1]}$ we illustrate the approximation using a finite iterate~$\mathcal Y_M^{[\underline\alpha,\bar\alpha]}$ in Figure~\ref{fig:first:example}, for comparison the set~$\mathcal Z_\infty^{[0,1]}$ is also depicted.
+Although we can analytically calculate $\mathcal Y_\infty^{[0,1]}$ we illustrate the approximation using a finite iterate~$\mathcal Y_M^{[\underline\alpha,\bar\alpha]}$ in Figure~\ref{fig:first:example}, for comparison the set~$\mathcal Z_\infty^{[\underline\alpha,\bar\alpha]}$ is also depicted.
 
 
 The second system we consider is the two-dimensional example presented in~\cite[Sect.~4.1]{Mayne2005}:
@@ -50,19 +50,19 @@ This confirms that in general a statement similar to Lemma~\ref{lem:YalphaConvY1
 \draw[latex'-] (.2,.1) to[out=0,in=90] (.7,-.1) node[below] {$\alpha\mathcal R_\infty^1$};
 \end{tikzpicture}%
 }\\
-\subfloat[$\mathcal Z_1^{[0,1]}=\mathcal Z_\infty^{[0,1]}$]{%
+\subfloat[$\mathcal Z_1^{[0.2,0.8]}=\mathcal Z_\infty^{[0.2,0.8]}$]{%
 \begin{tikzpicture}[scale=1.1]
 	\draw[-latex'] (0,0) node[below] {$0$} -- (0,2) node[right] {$\alpha$};
 	\draw[-latex'] (-2.2,0) -- (2.2,0) node[right] {$x$};
-	\fill[pattern = north east lines, opacity=0.8] (-2,0) -- (2,0) -- (2,1) -- (-2,1) -- cycle;
-	\draw[thick] (-2,0) -- (2,0) -- (2,1) -- (-2,1) -- cycle;
+	\fill[pattern = north east lines, opacity=0.8] (-2,.2) -- (2,.2) -- (2,.8) -- (-2,.8) -- cycle;
+	\draw[thick] (-2,.2) -- (2,.2) -- (2,.8) -- (-2,.8) -- cycle;
 	\draw (2,0) -- (2,1);
 	\draw (.1,1) -- (-.1,1) node[above right] {$1$};
 	\draw[dashed] (-2,-.1) node[below] {$-2$} -- (-2,1.2);
 	\draw[dashed] (2,-.1) node[below] {$2$} -- (2,1.2);
 \end{tikzpicture}%
 }
-\caption{Both RPI sets for example system A can be calculated explicitly for all $\alpha\leq\alpha^\ast$. We illustrate the approximation to $\mathcal Y_\infty^{[0.2,0.8]}$. The MRPI set $\mathcal Z^{[0,1]}_\infty$ is determined after one iteration and is given by the state constraints.}
+\caption{Both RPI sets for example system A can be calculated explicitly for all $\alpha\leq\alpha^\ast$. We illustrate the approximation to $\mathcal Y_\infty^{[0.2,0.8]}$. The MRPI set $\mathcal Z^{[0.2,0.8]}_\infty$ is determined after one iteration and is given by the state constraints.}
 \label{fig:first:example}
 \end{figure}
 %
