@@ -169,7 +169,7 @@ The set $\W^\alpha := \alpha \, \W^\ast$ denotes a scaled version  of a nominal 
 Roughly speaking, an RPI set $\Pp$ for system~\eqref{eq:system} with constraints~\eqref{eq:constraints} is such that the trajectory of the disturbed system~\eqref{eq:system} remains in $\Pp$ at all times $k\in \N$ for every initial conditions $x(0) \in \Pp$ and for all disturbances $w(k) \in \W^\alpha$ (see Def.~\ref{def:RPI} further below for a formal definition of RPI sets).
 Now, in this study, we study how RPI sets for system~\eqref{eq:system} with constraints~\eqref{eq:constraints} change with the scaling $\alpha$. More precisely, we intend to simultaneously describe a family of RPI sets for a given interval $[\lb{\alpha},\ub{\alpha}]$ of scaling factors. 
 Such parametric sets can, for example, be 
-used to study the sensitivity of the RPI sets for changes in
+used to study the sensitivity of the RPI sets to changes in
 the disturbance ``strength''.
 
 
@@ -462,11 +462,12 @@ Equations \eqref{eq:x1Sequence}, \eqref{eq:x1Sequence}, and \eqref{eq:xiW12} in 
 
 In the following theorem, we address the accurate outer approximation of the set $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty$.
 The result can be understood as a parametric extension of \cite[Thm.~1]{Rakovic2005}. As a preperation, we introduce the scaling matrix
- $$
+\begin{equation}
+\label{eq:scalingMatrixE}
  E^\epsilon := \begin{pmatrix}
  (1+\epsilon) I_n & 0 \\ 0 & 1
  \end{pmatrix} \in \R^{(n+1) \times (n+1)}
- $$ 
+\end{equation} 
 for some $\epsilon \in \R_+$ and the projection matrix
 $$
 P:=\begin{pmatrix}
@@ -486,8 +487,8 @@ A^{M} \W^\ast \subseteq \mu \,\W^\ast \quad \text{with} \quad \mu:=\frac{\epsilo
 $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq E^\epsilon\Y^{[\lb{\alpha},\ub{\alpha}]}_M$.
  Moreover, if
  \begin{equation}
-\label{eq:boundOnEpsilon}
-\epsilon \leq \frac{\alpha^\ast}{\ub{\alpha}}-1,
+\label{eq:boundOnAlphaUb}
+\ub{\alpha} \leq \frac{\alpha^\ast}{1+\epsilon},
 \end{equation}
  $P E^\epsilon \Y^{\alpha}_M$ is an RPI set for~\eqref{eq:system} with~\eqref{eq:constraints} for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$. 
 \end{thm}
@@ -504,16 +505,17 @@ $$
 $$
 Obviously, $\Rr_\infty^\alpha \subseteq  (1+\epsilon) \, \Rr_M^\alpha $ can equivalently be stated as $
 \Rr_\infty^\alpha \subseteq  (1+\epsilon) \,I_p\, \Rr_M^\alpha$ 
-which proves $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq E^\epsilon\Y^{[\lb{\alpha},\ub{\alpha}]}_M$. To see that \eqref{eq:boundOnEpsilon} implies that $P E^\epsilon \Y^{\alpha}_M$ is an RPI set  for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$, first note that $P E^\epsilon \Y^{\alpha}_M = (1+\epsilon) \Rr_M^\alpha$. Clearly, $(1+\epsilon) \Rr_M^\alpha \subseteq \X$ due to $\alpha \leq \ub{\alpha} < \alpha^\ast$ and~\eqref{eq:boundOnEpsilon}. Moreover, according to the proof of \cite[Thm.~1]{Rakovic2005}, \eqref{eq:conditionYEpsApproximation} implies 
+which proves $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq E^\epsilon\Y^{[\lb{\alpha},\ub{\alpha}]}_M$. To see that \eqref{eq:boundOnAlphaUb} implies that $P E^\epsilon \Y^{\alpha}_M$ is an RPI set  for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$, first note that $P E^\epsilon \Y^{\alpha}_M = (1+\epsilon) \Rr_M^\alpha$. Clearly, $(1+\epsilon) \Rr_M^\alpha \subseteq \X$ due to~\eqref{eq:boundOnAlphaUb}. Moreover, according to the proof of \cite[Thm.~1]{Rakovic2005}, \eqref{eq:conditionYEpsApproximation} implies 
 $$ (1+\epsilon) A \, \Rr_M^\alpha \oplus \W^\alpha \subseteq (1+\epsilon) \Rr_M^\alpha,
 $$
 which proves that $(1+\epsilon) \Rr_M^\alpha$ is an RPI set  for~\eqref{eq:system} with~\eqref{eq:constraints} according to Def.~\ref{def:RPI}.
 \end{proof}
 
-
-The approximation in Thm.~\ref{thm:outerApproxYinfI} is useful since 
-$\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is generally not finitely determined. In other words, we may have $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subset \Y^{[\lb{\alpha},\ub{\alpha}]}_k $ for every $k \in \N$. In contrast, as summarized in the following theorem, the 
-set $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is always finitely determined.
+Note that Thm.~\ref{thm:outerApproxYinfI} provides two statements.
+First, it presents a method to accurately approximate $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty $. This is useful since 
+$\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is generally not finitely determined. In other words, we may have $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subset \Y^{[\lb{\alpha},\ub{\alpha}]}_k $ for every $k \in \N$. Second, provided that the maximal scaling $\ub{\alpha}$ satisfies~\eqref{eq:boundOnAlphaUb}, the outer approximation of $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty $ contains RPI sets. \textcolor{red}{Add one sentence why this is cool}.
+In contrast to $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty $,  the 
+set $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is always finitely determined as summarized in the following theorem.
 
 
 \begin{thm}
@@ -581,7 +583,7 @@ according to~\eqref{eq:criticalAlpha} and \cite[Rem.~2.1]{Kolmanovsky1998}. Thus
 
 
 \begin{rem}
-Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproximation} and~\eqref{eq:conditionZFinitelyDetermined}, respectively, can always be found since both $\mu$ and $\eta$ lie in the interval $(0,1)$, since the eigenvalues of $A$ are strictly stable, and since $\X$ is a C-set according by assumption. Assume, for example, that $\lb{r}_w,\ub{r}_w \in \R_+$ denote the radii of a ball that is contained in $\W^\ast$ and a ball that contains $\W^\ast$, respectively. Then, \eqref{eq:conditionYEpsApproximation} holds if 
+Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproximation} and~\eqref{eq:conditionZFinitelyDetermined}, respectively, can always be found since both $\mu$ and $\eta$ lie in the interval $(0,1)$, since the eigenvalues of $A$ are strictly stable, and since $\X$ and $\W^\ast$ are C-sets. Assume, for example, that $\lb{r}_w,\ub{r}_w \in \R_+$ denote the radii of a ball that is contained in $\W^\ast$ and a ball that contains $\W^\ast$, respectively. Then, \eqref{eq:conditionYEpsApproximation} holds if 
 \begin{equation}
 \label{eq:MBoundApprox}
 \|A^M\|_2 \leq \frac{\mu \,\lb{r}_w}{\ub{r}_w}. 
@@ -595,9 +597,8 @@ Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproxima
 
 \subsection{Approximation of the critical scaling}
 
-\textcolor{red}{ONLY NOTES IN THE FOLLOWING}
-
- Accurate approximation of critical scaling $\alpha^\ast$ for a user-defined error bound $\epsilon \in \R_+$.
+To apply the results  in Thms.~\ref{thm:ZkCCF}, \ref{thm:outerApproxYinfI}, and \ref{thm:ZfinitelyDetermined}, we require (an approximation of) the critical scaling $\alpha^\ast$ in~\eqref{eq:criticalAlpha}. In general, the exact computation of $\alpha^\ast$ is demanding since $\Rr^1_\infty$ may not be finitely determined and since  $\Rr^1_\infty$ may be open (see the example in Sect.~\ref{subsec:example1}).
+However, according to the following theorem, an accurate approximation of $\alpha^\ast$ can be evaluated without computing $\Rr^1_\infty$.
 
 \begin{thm}
 \label{thm:approxCritScaling}
@@ -618,14 +619,17 @@ Analogously to the proof of Thm.~\ref{thm:outerApproxYinfI}, satisfaction of \eq
 
 \section{Computation and numerical examples}
 
+
+
 In Sect.~\ref{sec:parametricRPIsets}, we discussed properties of parametric RPI sets and the approximation of the critical scaling $\alpha^\ast$ for general C-sets $\X$ and $\W^\ast$.
 However, the actual computation of the sets $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ and $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ and the approximation of $\alpha^\ast$ is demanding for this general setup. 
 We thus consider polytopic sets $\X$ and $\W^\ast$ to illustrate the  findings in Sect.~\ref{sec:parametricRPIsets}. 
 More precisely, we assume $\X$ and $\W^\ast$ can be written as
 \begin{align}
-\nonumber
-\X \!= \!\{ x \in \R^n \,|\, H_x  x \leq d_x \}  \,\, \text{and}  \,\,
-\W^\ast\! = \! \{ w \!\in \R^n \,|\, H_w  w \leq d_w \}
+\label{eq:polytopeX}
+\X &= \{ x \in \R^n \,|\, H_x  x \leq d_x \}  \qquad  \text{and}  \\
+\label{eq:polytopeW}
+\W^\ast &=  \{ w \in \R^n \,|\, H_w  w \leq d_w \}
 \end{align}
 with $H_x \in \R^{L_x \times n}$, $d_x \in \R^{L_x}$,  $H_w \in \R^{L_w \times n}$.
 For polytopic $\X$ and $\W^\ast$, it is well-known that the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ are  polytopes as well.
@@ -673,56 +677,134 @@ Analogously, \eqref{eq:conditionZFinitelyDetermined} holds if and only if
  h_{\X}(H_x A^{N+1}) \leq \eta \,d_x.
 \end{equation}
 Finally, similar to \cite[Eq.~(12)]{Rakovic2005}, the solution of the optimization~\eqref{eq:criticalAlphaApprox} evaluates to
-$$
+\begin{equation}
+\label{eq:computeAlphaCritApprox}
 \widehat{\alpha}^\ast = \min_{i \in \N_{[1,L_x]}} \frac{e_i^T d_x}{(1+\epsilon)\,\sum_{k=0}^{M-1} h_{\W^\ast}(e_i^T H_x A^k) }.
-$$
+\end{equation}
 Note that the explicit computation of $\Rr_M^1$ is not required to solve~\eqref{eq:criticalAlphaApprox}.
 In the following, we analyze two examples to illustrate the statements in Lem.~\ref{lem:YalphaConvY1} and Thms.~\ref{thm:outerApproxYinfI}, \ref{thm:ZfinitelyDetermined}, and \ref{thm:approxCritScaling}.
 
 \subsection{Example 1}
+\label{subsec:example1}
 
 We first consider system~\eqref{eq:system} with 
 $A=0.5$
-and the constraints $\X=[-2,2]$ and $\W^\ast=[-1,1]$. For this simple example, which was also analyzed in \cite[Exmp.~6.10]{Blanchini2008} (without state constraints), the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ can be explicitly stated. 
-In fact, it is easy to prove that we obtain 
+and the constraints $\X=[-2,2]$ and $\W^\ast=[-1,1]$, which was also analyzed in \cite[Exmp.~6.10]{Blanchini2008} (without state constraints). 
+In order to apply Thm.~\ref{thm:outerApproxYinfI} to compute an outer approximation of the parametric mRPI set, we first choose the smallest $M \in \N$ such that~\eqref{eq:conditionYEpsApproximation} holds for $\epsilon = 0.1$. For this example, we easily find
 $$
-\Rr_k^\alpha=[-\rho_k^\alpha,\rho_k^\alpha] \quad \text{with} \quad\rho_k^\alpha:=\alpha \, (2 - 0.5^k) 
+A^{4} \W^\ast\! = \![-0.0625,0.0625] \!\subseteq \mu \,\W^\ast \! = \! [-0.\overline{09},0.\overline{09}] \!\subset \! A^{3} \W^\ast
 $$
-and
+and consequently $M=4$. The same result can be obtained by computing the smallest $M$ that satisfies~\eqref{eq:MBoundPrecise}. In this context, note that $\X$ and $\W^\ast$ can be written as in~\eqref{eq:polytopeX}--\eqref{eq:polytopeW} with
 $$
-\Ss_k^\alpha = \left\{ \begin{array}{ll}
-\X & \text{if} \quad \alpha \leq 1, \\
-\,\![-\sigma_k^\alpha,\sigma_k^\alpha] & \text{if} \quad \alpha > 1 \,\, \text{and} \,\, k \leq \left\lfloor \log_2 \left( \frac{2\,\alpha}{\alpha-1} \right)\right\rfloor,\\
-\emptyset & \text{otherwise}
-\end{array}\right.
-$$
-with 
-$$
-\sigma_k^\alpha:=2\,\alpha -2^{k+1} (\alpha-1).
-$$
-
-$$
-\sigma_k^\alpha:= \left\{ \begin{array}{ll}
+H_x = H_w = \begin{pmatrix}
+\blind{+}1 \\
+-1
+\end{pmatrix}, \quad d_x = \begin{pmatrix}
 2 \\
-\end{array}\right.
+2
+\end{pmatrix}, \quad \text{and}\quad d_w = \begin{pmatrix}
+1 \\
+1
+\end{pmatrix}.
 $$
+We next compute an (accurate) approximation of the critical scaling $\alpha^\ast$ and find $\widehat{\alpha}^\ast = 0.9697$ according to  Eqs.~\eqref{eq:criticalAlphaApprox} and \eqref{eq:computeAlphaCritApprox}. Theorem~\ref{thm:approxCritScaling} additionally states that $\alpha^\ast \in [1,1+\epsilon ] \,\widehat{\alpha}^\ast = [0.9697,1.0667]$. This is obviously true since we have $\alpha^\ast = 1$ for this example. To see this, note that we obtain the sets
+\begin{equation}
+\label{eq:RkExample1}
+\Rr_k^\alpha=[-\rho_k^\alpha,\rho_k^\alpha] \quad \text{with} \quad\rho_k^\alpha:=\alpha \left(2 - 0.5^{k-1} \right)
+\end{equation}
+according to~\eqref{eq:sequenceRk}. Clearly, $\lim_{k\rightarrow \infty} \rho_k^\alpha = 2\,\alpha$ but $\rho_k^\alpha < 2\,\alpha$ for every $k \in \N$. We thus find $\Rr_\infty^1=(-2,2)$ and $\alpha^\ast = 1$ according to~\eqref{eq:criticalAlpha}.
+We now compute the parametric set $\Y_M^{[\lb{\alpha},\ub{\alpha}]}$ for the interval $[\lb{\alpha},\ub{\alpha}] = [0.2,0.8]$.
+ Note that $\ub{\alpha}$ is such that condition~\eqref{eq:boundOnAlphaUb} holds since 
+$$
+\ub{\alpha} = 0.8 \leq \frac{\widehat{\alpha}^\ast}{1+\epsilon} =0.8815 \leq  \frac{\alpha^\ast}{1+\epsilon} = 0.\overline{90}.
+$$
+According to Lem.~\ref{lem:YalphaConvY1}, the set $\Y_M^{[\lb{\alpha},\ub{\alpha}]}$ is completely described by $\Y^1_M$ which, on its own, is given by $\Rr_M^1$. Evaluating~\eqref{eq:RkExample1} for $k=M=4$ yields $\Rr_M^1=[-1.875,1.875]$ (see the blue bar in Fig.~\ref{fig:first:example}).
+We thus obtain
+$$
+\Y^{[\lb{\alpha},\ub{\alpha}]}_M = \conv \left\{ 
+0.2\begin{pmatrix}
+\pm 1.875 \\
+1
+\end{pmatrix},\,0.8\begin{pmatrix}
+\pm 1.875 \\
+1
+\end{pmatrix}
+\right\},
+$$
+which refers to the blue dash-dotted polytope in Fig.~\ref{fig:first:example}.
+The outer approximation of $\Y^{[\lb{\alpha},\ub{\alpha}]}_M $ finally results from scaling $\Y^{[\lb{\alpha},\ub{\alpha}]}_M$ with the matrix $E^\epsilon$ from~\eqref{eq:scalingMatrixE}, which leads to
+$$
+E^\epsilon \,\Y^{[\lb{\alpha},\ub{\alpha}]}_M = \conv \left\{ 
+\begin{pmatrix}
+\pm 0.4125 \\
+0.2
+\end{pmatrix},\,\begin{pmatrix}
+\pm 1.65 \\
+0.8
+\end{pmatrix}
+\right\}.
+$$
+This parametric set refers to the gray set in Fig.~\ref{fig:first:example}. Since condition~\eqref{eq:boundOnAlphaUb}
+is satisfied, Thm.~\ref{thm:outerApproxYinfI} states that $P E^\epsilon \Y^{\alpha}_M$ is an RPI set for~\eqref{eq:system} with~\eqref{eq:constraints} for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$. Consider for example $\alpha = 0.5$ and the set 
+$$
+P E^\epsilon \Y^{\alpha}_M = (1+\epsilon) \Rr_M^{\alpha}=[-1.0313,1.0313],
+$$
+which is depicted in green in Fig.~\ref{fig:first:example}.
+It is easy to see that $[-1.0313,1.0313]$ is indeed an RPI for $\alpha=0.5$ since
+\begin{align} 
+\nonumber 
+A \, [-1.0313,1.0313] \oplus \W^\alpha &= [-1.0156,1.0156] \\
+\nonumber
+&\subseteq [-1.0313,1.0313].
+\end{align}
+
+We next compute the parametric MRPI set for the same interval $[\lb{\alpha},\ub{\alpha}] = [0.2,0.8]$. To this end, we first compute an $N \in \N$ such that~\eqref{eq:conditionZFinitelyDetermined} holds. At this point, note that $\alpha^\ast$ is generally not exactly available. However, choosing an $N$ such that
+\begin{equation}
+A^{N+1} \X \subseteq \widehat{\eta} \,\X \quad \text{with} \quad\widehat{\eta}:= 1 - \frac{\ub{\alpha}}{\widehat{\alpha}^\ast}
+\end{equation}
+holds obviously implies satisfaction of\eqref{eq:conditionZFinitelyDetermined} (due to $\widehat{\eta}\leq \eta$).
+For this example, we find $\widehat{\eta}= 0.1750$ and $N=2$ and consequently $\Z_\infty^{[\lb{\alpha},\ub{\alpha}]}=\Z_N^{[\lb{\alpha},\ub{\alpha}]}$ according to Thm.~\ref{thm:ZfinitelyDetermined}. Now, due to the simple dynamics, we obtain $\Ss_k^\alpha=\X=\Pp_{\max}^\alpha$ for every $k \in \N$ and every $\alpha \in (0,\alpha^\ast]=(0,1]$. We thus find $\Z_N^{[\lb{\alpha},\ub{\alpha}]} = \X \times [\lb{\alpha},\ub{\alpha}]$ as illustrated in Fig.~\ref{fig:first:example}. 
+Clearly, the additional statement in Thm.~\ref{thm:ZfinitelyDetermined} that 
+ $P \Z^{\alpha}_N = \Pp_{\max}^\alpha$ for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$, trivially holds for this simple example.
+
+%For this simple example, which was also analyzed in \cite[Exmp.~6.10]{Blanchini2008} (without state constraints), the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ can be explicitly stated. 
+%In fact, it is easy to prove that we obtain 
+%$$
+%\Rr_k^\alpha=[-\rho_k^\alpha,\rho_k^\alpha] \quad \text{with} \quad\rho_k^\alpha:=\alpha \, (2 - 0.5^k) 
+%$$
+%and
+%$$
+%\Ss_k^\alpha = \left\{ \begin{array}{ll}
+%\X & \text{if} \quad \alpha \leq 1, \\
+%\,\![-\sigma_k^\alpha,\sigma_k^\alpha] & \text{if} \quad \alpha > 1 \,\, \text{and} \,\, k \leq \left\lfloor \log_2 \left( \frac{2\,\alpha}{\alpha-1} \right)\right\rfloor,\\
+%\emptyset & \text{otherwise}
+%\end{array}\right.
+%$$
+%with 
+%$$
+%\sigma_k^\alpha:=2\,\alpha -2^{k+1} (\alpha-1).
+%$$
+%In order to compute a
 
 
-$\widehat{\alpha}^\ast=...$ for $\epsilon=0.1$, $\mu=\frac{1}{11}$
 
-$\lb{\alpha}=0.2$,
-$\ub{\alpha}=0.8$
 
-Since
-$$
-\epsilon \leq  \frac{\widehat{\alpha}^\ast}{\ub{\alpha}}-1 = .. \leq \frac{\alpha^\ast}{\ub{\alpha}}-1 = 0.25,
-$$
+%$\widehat{\alpha}^\ast=...$ for $\epsilon=0.1$, $\mu=\frac{1}{11}$
+%
+%$\lb{\alpha}=0.2$,
+%$\ub{\alpha}=0.8$
+%
+%Since
+%$$
+%\epsilon \leq  \frac{\widehat{\alpha}^\ast}{\ub{\alpha}}-1 = .. \leq \frac{\alpha^\ast}{\ub{\alpha}}-1 = 0.25,
+%$$
 
-$$
-\hat{\eta}:= 1 - \frac{\ub{\alpha}}{\widehat{\alpha}^\ast} = ... \leq 
-$$
+
 
 \subsection{Example 2}
+
+\textcolor{red}{ONLY NOTES IN THE FOLLOWING}
+
 
  \cite[Sect.~4.1]{Mayne2005} 
 
@@ -765,11 +847,11 @@ $\begin{pmatrix}
 
 \begin{lem}
 \label{lem:SkRk}
-Let $k \in \N$. Then, the set $\Ss_k^\alpha$ defined by the sequence~\eqref{eq:sequenceSk} can be expressed as in~\eqref{eq:relationSkRk}.
+Let $k \in \N$. Then, the set $\Ss_k^\alpha$ can be expressed as in~\eqref{eq:relationSkRk}.
 \end{lem}
 
 \begin{proof}
-We prove the claim by induction. Relation~\eqref{eq:relationSkRk} obviously holds for $k = 0$ since obtain $\Ss_0^\alpha = \X$ as in~\eqref{eq:sequenceSk}. It remains to show that~\eqref{eq:relationSkRk} implies
+We prove the claim by induction. Relation~\eqref{eq:relationSkRk} obviously holds for $k = 0$ since we obtain $\Ss_0^\alpha = \X$ as in~\eqref{eq:sequenceSk}. It remains to show that~\eqref{eq:relationSkRk} implies
 \begin{equation}
 \label{eq:inductionStep}
 \Ss_{k+1}^\alpha = \bigcap_{j=0}^{k+1} (A^{j})^{-1} (\X \ominus \Rr_{j}^\alpha).
