@@ -55,7 +55,7 @@ For this setup the approximation of $\alpha^\ast$ leads to the lower and upper b
 \end{figure}
 
 \begin{figure}
-\tdplotsetmaincoords{80}{-30}
+\tdplotsetmaincoords{75}{-45}
 \centering
 \begin{tikzpicture}[tdplot_main_coords]
 \draw[-latex'] (0,0,0) -- (0,0,3.5) node[right] {$\alpha$};
@@ -74,11 +74,21 @@ For this setup the approximation of $\alpha^\ast$ leads to the lower and upper b
 
 \begin{figure}\centering
 \begin{tikzpicture}
-\draw[-latex'] (0,0) -- (0,2) node[right] {$x_2$};
-\draw[-latex'] (0,0) -- (2.5,0) node[below] {$x_1$};
-\draw (1.9529,   -0.2191) -- (-2.5000,    2.0000) -- (-2.8137,    2.0000) -- (-1.9529,    0.2191) -- (2.9132,   -2.2059) -- cycle; % \alpha = 1
-\draw (1.5397,   -0.0132) -- (-2.5000,    2.0000) -- (-2.5000,    2.0000) -- (-1.5397,    0.0132) -- (2.5000,   -2.0000) -- cycle; %\alpha = 1.6849
-\draw[densely dotted] (2.0615,   -1.0928) -- (1.5397,   -0.0132) -- (-0.8800,    1.1927) -- (-2.2755,    1.8881) -- (-2.4459,    1.8881) -- (-1.5397,    0.0132) -- (1.1045,   -1.3046) -- (2.5000,   -2.0000) -- cycle; % interpolated
-\draw (2.0082,   -1.7549) -- (1.0480,    0.2318) -- (-2.0082,    1.7549) -- (-1.0480,   -0.2318) -- cycle; %\alpha = 2.5
+\draw[loosely dotted, step=0.5] (-3,-2.5) grid (3,2);
+\foreach \x in {-3,-2,...,3} \draw (\x,-2.4) -- (\x,-2.6) node[below] {$\x$};
+\foreach \y in {-2,-1,...,2} \draw (-2.9,\y) -- (-3.1,\y) node[left] {$\y$};
+\draw[-latex'] (-3,-2.5) -- (-3,2.2) node[right] {$x_2$};
+\draw[-latex'] (-3,-2.5) -- (3.4,-2.5) node[below] {$x_1$};
+\draw[thick] (1.9529,   -0.2191) -- (-2.5000,    2.0000) -- (-2.8137,    2.0000) -- (-1.9529,    0.2191) -- (2.9132,   -2.2059) -- cycle; % \alpha = 1
+\draw[thick] (1.5397,   -0.0132) -- (-2.5000,    2.0000) -- (-2.5000,    2.0000) -- (-1.5397,    0.0132) -- (2.5000,   -2.0000) -- cycle; %\alpha = 1.6849
+\draw (2.0615,   -1.0928) -- (1.5397,   -0.0132) -- (-0.8800,    1.1927) -- (-2.2755,    1.8881) -- (-2.4459,    1.8881) -- (-1.5397,    0.0132) -- (1.1045,   -1.3046) -- (2.5000,   -2.0000) -- cycle; % interpolated
+\draw[thick] (2.0082,   -1.7549) -- (1.0480,    0.2318) -- (-2.0082,    1.7549) -- (-1.0480,   -0.2318) -- cycle; %\alpha = 2.5
+\draw[latex'-] (-2.6418, 1.6438) to[out=-100,in=180] (-1.5,-1) node[right] {$\mathcal S_\infty^{2.5}$};
+\draw[latex'-] (1.8160, -1.3576) to[out=180,in=60] (1,-1.5) node[below] {$\mathcal S_\infty^1$};
+\draw[latex'-] (-2.3605, 1.8880) to[out=-60,in=180] (0,1) node[right] {$\lambda\mathcal S_\infty^1\oplus(1-\lambda)\mathcal S_\infty^{2.5}$};
+\draw[latex'-] (-2.3875, 1.9440) to[out=30,in=160] (0,1.5) node[right] {$\mathcal S_\infty^{1.6849}$};
 \end{tikzpicture}
+\caption{Example that a statement similar to Lemma~\ref{lem:YalphaConvY1} does not hold for $\mathcal Z_\infty^{[\underline\alpha,\bar\alpha]}$.
+%
+The set $\mathcal Z_\infty^{[\underline\alpha,\bar\alpha]}$ for a polytopic setup is itself a poyltope, therefore $0\leq\underline\alpha<\bar\alpha\leq\alpha^\ast$ can be found such that $\lambda\mathcal S_\infty^{\underline\alpha}\oplus(1-\lambda)\mathcal S_\infty^{\bar\alpha}\subseteq\mathcal S_\infty^{\lambda\underline\alpha+(1-\lambda)\bar\alpha}$.} 
 \end{figure}
