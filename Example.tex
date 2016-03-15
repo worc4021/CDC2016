@@ -13,7 +13,7 @@ where the state is constrained to the interval~$\X=[-2,2]$ and the disturbance h
 %
 In this case the critical alpha can be explicitly calculated to be~$\alpha^\ast=1$ and both $\mathcal Z_\infty^{[0,\alpha^\ast]}$ and $\mathcal Y_\infty^{[0,\alpha^\ast]}$ can be explicitly determined.
 %
-The graph~$\mathcal Z^{[\frac{1}{2},1]}_\infty$ is illustrated in Figure~\ref{fig:first:example:MRPI}.
+The graph~$\mathcal Z^{[\frac{1}{2},1]}_\infty$ is illustrated in Figure~\ref{fig:first:example}.
 
 
 The second system we consider is the two-dimensional example presented in~\cite[Sect.~4.1]{Mayne2005}:
@@ -28,7 +28,7 @@ The constraints for this system are given by $\mathcal X = \{x\in\mathbb R^2\ver
 %
 For this setup the approximation of $\alpha^\ast$ leads to the lower and upper bounds $\underline\alpha = 3.362391$ and $\bar\alpha=3.362728$ respectively.
 %
-\begin{figure}\begin{tikzpicture}
+\begin{figure}\centering\subfloat[$\mathcal Y_\infty^{[0,\alpha^\ast]}$]{%
 \begin{tikzpicture}
 \draw[-latex'] (0,0) node[below] {$0$} -- (0,2) node[right] {$\alpha$};
 \draw[-latex'] (-2.2,0) -- (2.2,0) node[right] {$x$};
@@ -44,7 +44,9 @@ For this setup the approximation of $\alpha^\ast$ leads to the lower and upper b
 \draw (.8525,.4) -- (1.705,.8) -- (-1.705,.8) -- (-.8525,.4) -- cycle;
 \draw[latex'-] (.5,.6) to[out=60,in=180] (1,1.5) node[right] {$(1+\epsilon)\alpha\mathcal R_4^1$};
 \draw[latex'-] (.4,.2) to[out=-30,in=90] (.7,-.1) node[below] {$\alpha\mathcal R_\infty^1$};
-\end{tikzpicture}
+\end{tikzpicture}%
+}~~
+\subfloat[$\mathcal Z_\infty^{[0,\alpha^\ast]}$]{%
 \begin{tikzpicture}
 	\draw[-latex'] (0,0) node[below] {$0$} -- (0,2) node[right] {$\alpha$};
 	\draw[-latex'] (-2.2,0) -- (2.2,0) node[right] {$x$}; 
@@ -52,14 +54,11 @@ For this setup the approximation of $\alpha^\ast$ leads to the lower and upper b
 	\draw (2,0) -- (2,1);
 	\draw (.1,1) -- (-.1,1) node[above right] {$\alpha^\ast$};
 	\draw (-2,0) node[below] {$-2$} -- (-2,1);
-\end{tikzpicture}
-\end{tikzpicture}
-\caption{$\mathcal Y_\infty^{[0,\alpha^\ast]}$ for $x(k+1) = \frac{1}{2}x(k) + w$.}\label{fig:first:example:mRPI}
+\end{tikzpicture}%
+}
+\caption{ for $x(k+1) = \frac{1}{2}x(k) + w$.}\label{fig:first:example}
 \end{figure}
 %
-\begin{figure}\centering
-\caption{$\mathcal Z_\infty^{[0,\alpha^\ast]}$ for the $x(k+1) = \frac{1}{2}x(k) + w$.}\label{fig:first:example:MRPI}
-\end{figure}
 
 \begin{figure}
 \tdplotsetmaincoords{75}{-45}
