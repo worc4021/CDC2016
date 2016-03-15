@@ -167,7 +167,7 @@ x(k) \in \X  \quad \text{and} \quad w(k) \in \W^\alpha \quad \text{for every} \q
 \end{equation}
 The set $\W^\alpha := \alpha \, \W^\ast$ denotes a scaled version  of a nominal disturbance set $\W^\ast$ for some scalar $\alpha>0$.
 Roughly speaking, an RPI set $\Pp$ for system~\eqref{eq:system} with constraints~\eqref{eq:constraints} is such that the trajectory of the disturbed system~\eqref{eq:system} remains in $\Pp$ at all times $k\in \N$ for every initial conditions $x(0) \in \Pp$ and for all disturbances $w(k) \in \W^\alpha$ (see Def.~\ref{def:RPI} further below for a formal definition of RPI sets).
-Now, in this study, we study how RPI sets for system~\eqref{eq:system} with constraints~\eqref{eq:constraints} change with the scaling $\alpha$. More precisely, we intend to simultaneously describe a family of RPI sets for a given interval $[\lb{\alpha},\ub{\alpha}]$ of scaling factors. 
+Now, in this study, we analyze how RPI sets for system~\eqref{eq:system} with constraints~\eqref{eq:constraints} change with the scaling $\alpha$. More precisely, we intend to simultaneously describe a family of RPI sets for a given interval $[\lb{\alpha},\ub{\alpha}]$ of scaling factors. 
 Such parametric sets can, for example, be 
 used to study the sensitivity of the RPI sets to changes in
 the disturbance ``strength''.
@@ -760,6 +760,7 @@ A \, [-1.0313,1.0313] \oplus \W^\alpha &= [-1.0156,1.0156] \\
 
 We next compute the parametric MRPI set for the same interval $[\lb{\alpha},\ub{\alpha}] = [0.2,0.8]$. To this end, we first compute an $N \in \N$ such that~\eqref{eq:conditionZFinitelyDetermined} holds. At this point, note that $\alpha^\ast$ is generally not exactly available. However, choosing an $N$ such that
 \begin{equation}
+\label{eq:NConditionApprox}
 A^{N+1} \X \subseteq \widehat{\eta} \,\X \quad \text{with} \quad\widehat{\eta}:= 1 - \frac{\ub{\alpha}}{\widehat{\alpha}^\ast}
 \end{equation}
 holds obviously implies satisfaction of\eqref{eq:conditionZFinitelyDetermined} (due to $\widehat{\eta}\leq \eta$).
@@ -803,22 +804,79 @@ Clearly, the additional statement in Thm.~\ref{thm:ZfinitelyDetermined} that
 
 \subsection{Example 2}
 
-\textcolor{red}{ONLY NOTES IN THE FOLLOWING}
-
-
- \cite[Sect.~4.1]{Mayne2005} 
-
-$\begin{pmatrix}
+We next consider system~\eqref{eq:system} with 
+$$A=\begin{pmatrix}
 \blind{+}0.6696 & \blind{+}0.3369  \\ -0.6609 & -0.3261
-\end{pmatrix}$  
+\end{pmatrix}$$
+and the constraints 
+$$
+\X = \{x \in \R^2 \,|\,  -1 \leq K x \leq 1, \, -4 \leq x_2 \leq 2 \}
+$$
+and $\W^\ast=\{ w \in \R^2 \,|\, \|w\|_\infty \leq 0.1 \}$ with 
+$$
+K:=\begin{pmatrix}
+-0.6609 &  -1.3261
+\end{pmatrix}.
+$$
+The example results from the system
+$$
+	x(k+1) = \begin{pmatrix} 1 &1 \\ 
+	0& 1
+	\end{pmatrix} x(k) + \begin{pmatrix} 0.5 \\1.0 \end{pmatrix} u(k) + w(k)
+$$
+with the controller $u(k)=K\,x(k)$ and the input constraints $\|u(k)\| \leq 1$ as discussed in \cite[Sect.~4.1]{Mayne2005} (without the artificial state constraint $-4 \leq x_2$ that makes $\X$ a C-set).
+
+We now follow the same steps as in Sect.~\ref{subsec:example1} for the same choice of $\epsilon$ and $[\lb{\alpha},\ub{\alpha}]=[0.5,2.5]$. We first find $M=4$ and $\widehat{\alpha}^\ast=3.0961$ and note that $\ub{\alpha}$ satisfies condition~\eqref{eq:boundOnAlphaUb} since
+$\ub{\alpha} = 2.5 \leq \widehat{\alpha}^\ast \,(1+\epsilon)^{-1} =2.8146$.
+We next compute $\Rr_M^1$ and $\Y^{[\lb{\alpha},\ub{\alpha}]}_M$ according to~\eqref{eq:sequenceRk} and Lem.~\ref{lem:YalphaConvY1}, respectively, and derive the scaled set $E^\epsilon \,\Y^{[\lb{\alpha},\ub{\alpha}]}_M$ which is shown in Fig.. 
+Finally, we identify the smallest $N$ that satisfies~\eqref{eq:NConditionApprox} for $\widehat{\eta}=0.1925$ and obtain $N=3$.  
+
+\begin{figure}[!h] 
+\psfrag{xl3}[c][c]{\small$0.8$}
+\psfrag{xl2}[c][c]{\small$0$}
+\psfrag{xl1}[c][c]{\small$-0.8$}
+\psfrag{yl3}[c][c]{\small\,$0.8$}
+\psfrag{yl2}[c][c]{\small\,$0$}
+\psfrag{yl1}[c][c]{\small$-0.8$}
+\psfrag{zl3}[r][r]{\small\,$2.5$}
+\psfrag{zl2}[r][r]{\small\,$1.5$}
+\psfrag{zl1}[r][r]{\small$0.5$}
+\psfrag{x1}[c][c]{$x_1$}
+\psfrag{x2}[ct][cb]{$x_2$}
+\psfrag{a}[c][c]{$\alpha$}
+
+\includegraphics[trim=1mm 3mm 0mm 0mm, clip=true,width=1.0\linewidth]{figYMExample2.eps}
+\caption{
+Illustration of .
+} 
+\label{fig:figYMExample2}
+\end{figure}
+
+\begin{figure}[!h] 
+\psfrag{xl3}[c][c]{\small$4$}
+\psfrag{xl2}[c][c]{\small$0$}
+\psfrag{xl1}[c][c]{\small$-4$}
+\psfrag{yl3}[c][c]{\small\,$3$}
+\psfrag{yl2}[c][c]{\small\,$0$}
+\psfrag{yl1}[c][c]{\small$-3$}
+\psfrag{zl3}[r][r]{\small\,$2.5$}
+\psfrag{zl2}[r][r]{\small\,$1.5$}
+\psfrag{zl1}[r][r]{\small$0.5$}
+\psfrag{x1}[c][c]{$x_1$}
+\psfrag{x2}[ct][cb]{$x_2$}
+\psfrag{a}[c][c]{$\alpha$}
+
+\includegraphics[trim=1mm 3mm 0mm 0mm, clip=true,width=1.0\linewidth]{figZNExample2.eps}
+\caption{
+Illustration of .
+} 
+\label{fig:figZNExample2}
+\end{figure}
 
 
-  $\begin{array}{rl}
--4\!\!\! &\leq x_2 \leq 2 \\
--1\!\!\! &\leq K x \leq 1
-\end{array}$  
+\textcolor{red}{------ONLY NOTES IN THE FOLLOWING--------}
 
- $\|w\|_\infty \leq 0.1$  
+
  
   $3.362391$    $3.362728$
   
