@@ -147,7 +147,7 @@ the Control Group, Department of Engineering Science,
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{abstract}
-Abstract
+\textcolor{red}{TBD}
 \end{abstract}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -166,14 +166,25 @@ x(k+1) = A \, x(k) + w(k)
 x(k) \in \X  \quad \text{and} \quad w(k) \in \W^\alpha \quad \text{for every} \quad k \in \N.
 \end{equation}
 The set $\W^\alpha := \alpha \, \W^\ast$ denotes a scaled version  of a nominal disturbance set $\W^\ast$ for some scalar $\alpha>0$.
+Roughly speaking, an RPI set $\Pp$ for system~\eqref{eq:system} with constraints~\eqref{eq:constraints} is such that the trajectory of the disturbed system~\eqref{eq:system} remains in $\Pp$ at all times $k\in \N$ for every initial conditions $x(0) \in \Pp$ and for all disturbances $w(k) \in \W^\alpha$ (see Def.~\ref{def:RPI} further below for a formal definition of RPI sets).
+Now, in this study, we study how RPI sets for system~\eqref{eq:system} with constraints~\eqref{eq:constraints} change with the scaling $\alpha$. More precisely, we intend to simultaneously describe a family of RPI sets for a given interval $[\lb{\alpha},\ub{\alpha}]$ of scaling factors. 
+Such parametric sets can, for example, be 
+used to study the sensitivity of the RPI sets for changes in
+the disturbance ``strength''.
 
 
-Extension of \cite{Schaich2015} in two directions. First, here we consider general C-sets instead of polytopes as in \cite{Schaich2015}. Second, we avoid the occurrence of empty sets by construction.
+Parametric RPI sets were previously studied in \cite{Schaich2015}. We extend the results in \cite{Schaich2015} in three directions.
+First, we present characterizations of parametric RPI sets that do not require $\X$ and $\W^\ast$ to be polytopic as in \cite{Schaich2015}.
+Second, we address parametric descriptions of minimal and maximal RPI sets while \cite{Schaich2015} is limited to the analysis of the maximal ones.
+Third, we present constructive methods to avoid the occurrence of empty RPI sets. This is important since it is easy to see that large scalings $\alpha$ exclude the existence of nonempty RPI sets (see, e.g., \cite[Exmp.~4.1]{Kolmanovsky1995}, \cite[p. 114]{Kouvaritakis2015}, and \cite[Sect.~4]{Lee1999}).
 
 
-In this paper, the sets $\X$ and $\W^\ast$ are assumed to be full-dimensional (see Assum.~\ref{assum:AXW} further below). While this is restrictive, the same setup was studied in \cite{Rakovic2005} % \cite{Rakovic2005,Schaich2015}.
+For our analysis, we make the standing assumptions that all eigenvalues of the system matrix $A \in \R^{n \times n}$ are strictly stable (i.e., $| \lambda|<1$) and that the sets $\X$ and $\W^\ast$ are convex and compact sets in $\R^n$ that contain the origin as an interior point. Moreover, we only consider positive scalings $\alpha$.
+Note that the assumption that $\W^\ast$ is full-dimensional is restrictive. However, the same setup was studied in \cite{Rakovic2005} and we will utilize some of the results in~\cite{Rakovic2005}. 
 
-The paper is organized as follow. We state notation in the remainder of this section.
+%In this paper, the sets $\X$ and $\W^\ast$ are assumed to be full-dimensional (see Assum.~\ref{assum:AXW} further below). While this is restrictive, the same setup was studied in \cite{Rakovic2005} % \cite{Rakovic2005,Schaich2015}.
+
+The paper is organized as follow. We state notation in the remainder of this section. \textcolor{red}{TBD}
 
 \subsection{Notation}
 
@@ -201,10 +212,10 @@ The matrix $I_p$ refers to the identity matrix in $\R^{p \times p}$.
 
 \section{Preliminaries}
 
+In the following, we specify the definition of RPI sets from the introduction.
 
 \begin{defn}
 \label{def:RPI}
-Let $\X, \W^\ast \subseteq \R^n$ and $\alpha \in \R_+$.
 The set $\Pp$ is called robust positively invariant (RPI) for system~\eqref{eq:system} with constraints~\eqref{eq:constraints}, if (i) $\Pp \subseteq \X$ and (ii) $A\, x+w\in \Pp$ for every $x \in \Pp$ and every $w \in \W^\alpha$.
 \end{defn}
 
@@ -212,60 +223,55 @@ Note that both the union and the intersection of two RPI sets result in another 
 
 \begin{defn}
 \label{def:MRPI}
-Let $\X, \W^\ast \subseteq \R^n$ and $\alpha \in \R_+$. The union of all RPI sets for~\eqref{eq:system} with~\eqref{eq:constraints} is called the maximal robust positively invariant (MRPI) set for~\eqref{eq:system} with~\eqref{eq:constraints} and denoted by $\Pp_{\max}^\alpha$.
+The union of all RPI sets for~\eqref{eq:system} with~\eqref{eq:constraints} is called the maximal robust positively invariant (MRPI) set for~\eqref{eq:system} with~\eqref{eq:constraints} and denoted by $\Pp_{\max}^\alpha$.
 \end{defn}
 
 \begin{defn}
 \label{def:mRPI}
-Let $\X, \W^\ast \subseteq \R^n$ and $\alpha \in \R_+$. The intersection of all nonempty RPI sets and the MRPI set for~\eqref{eq:system} with~\eqref{eq:constraints} is called the minimal robust positively invariant (mRPI) set for~\eqref{eq:system} with~\eqref{eq:constraints} and denoted by $\Pp_{\min}^\alpha$.
+The intersection of all nonempty RPI sets and the MRPI set for~\eqref{eq:system} with~\eqref{eq:constraints} is called the minimal robust positively invariant (mRPI) set for~\eqref{eq:system} with~\eqref{eq:constraints} and denoted by $\Pp_{\min}^\alpha$.
 \end{defn}
 
 Two important statements can be inferred  from Defs.~\ref{def:MRPI} and \ref{def:mRPI}. First, $\Pp_{\min}^\alpha$ is empty if and only if $\Pp_{\max}^\alpha$ is empty. Second, $\Pp_{\min}^\alpha \subseteq \Pp_{\max}^\alpha$.
-
-\begin{assum}
-\label{assum:AXW}
-The eigenvalues $\lambda \in \C$ of the matrix $A \in \R^{n \times n}$ are strictly stable (i.e., $| \lambda|<1$).
-The sets $\X$ and $\W^\ast$ are C-sets in $\R^n$.
-\end{assum}
-
-
+In order to characterize $\Pp_{\max}^\alpha$ and $\Pp_{\min}^\alpha$ more precisely, we will analyze two special sequences of sets (inspired by the sequences in \cite[Eqs. (1.10) and (4.3)]{Kolmanovsky1998}).
+The first sequence 
 \begin{equation}
 \label{eq:sequenceRk}
 \Rr_{k+1}^\alpha := A\, \Rr_k^\alpha \oplus \W^\alpha \qquad \text{with} \qquad  \Rr_{0}^\alpha:=\{0\}.
 \end{equation}
-
-We obviously have $\Rr_k^\alpha \subseteq \Rr_{k+1}^\alpha$.
-
-
+ provides sets $\Rr_k^\alpha \subseteq \R^n$ that contain states $x^\ast$ for which there exist disturbances $w(k) \in \W^\alpha$ such that
+$x^\ast = \sum_{j=0}^{k-1} A^{k-1-j}\,w(j)$.
+In other words, $\Rr_k^\alpha$ contains states that are reachable  from the origin within $k$ time steps.
+The second sequence
 \begin{equation}
 \label{eq:sequenceSk}
 \Ss_{k+1}^\alpha := A^{-1} (\Ss_k^\alpha \ominus \W^\alpha) \cap \X \quad \text{with} \quad  \Ss_{0}^\alpha:=\X,
 \end{equation}
-
-We obviously have $\Ss_k^\alpha \supseteq \Ss_{k+1}^\alpha$.
+defines sets $\Ss_k^\alpha \subseteq \R^n$ that contain initial conditions $x(0)$ for which the trajectory of the disturbed system~\eqref{eq:system} remains in $\X$ for at least $k$ time steps and for all disturbances in $\W^{\alpha}$.
+More precisely, all states in $\Ss_k^\alpha$ satisfy the following condition.
 
 \begin{lem}
 \label{lem:xInSkAlpha}
-Let Assum.~\ref{assum:AXW} be satisfied, let  $k \in \N_+$ and $\alpha \in \R_+$, and let $x_0 \in \X$. Then $x_0 \in \Ss_k^\alpha$ if and only if
+Let  $k \in \N_+$  and let $x_0 \in \X$. Then $x_0 \in \Ss_k^\alpha$ if and only if
 $$
 A^j x_0 + \sum_{i=0}^{j-1} A^{j-1-i} w(i)  \in \X
 $$
 for every $j \in \N_{[1,k]}$ and every disturbance sequence $w(0),\dots, w(k-1) \in \W^{\alpha}$.
 \end{lem}
 
-\begin{equation}
+Now, we obviously have $\Rr_k^\alpha \subseteq \Rr_{k+1}^\alpha$.
+and $\Ss_{k+1}^\alpha \subseteq \Ss_{k}^\alpha$ for every $k \in \N$.
+Thus, according to~\cite[p. 21]{Hausdorff1957}, the limits of the sequences~\eqref{eq:sequenceRk} and~\eqref{eq:sequenceSk} evaluate to 
+\begin{align}
 \label{eq:RLimit}
-\Rr_\infty^\alpha:=\lim_{k \rightarrow \infty} \Rr_k^\alpha =  \bigcup_{k=0}^\infty \Rr_k^\alpha
-\end{equation}
-
-\begin{equation}
+\Rr_\infty^\alpha &:=\lim_{k \rightarrow \infty} \Rr_k^\alpha =  \bigcup_{k=0}^\infty \Rr_k^\alpha \quad \text{and} \\
 \label{eq:SLimit}
-\Ss_\infty^\alpha:=\lim_{k \rightarrow \infty} \Ss_k^\alpha  = \bigcap_{k=0}^\infty \Ss_k^\alpha 
-\end{equation}
+\Ss_\infty^\alpha &:=\lim_{k \rightarrow \infty} \Ss_k^\alpha  = \bigcap_{k=0}^\infty \Ss_k^\alpha. 
+\end{align}
+It is well-known that these limits are closely related to $\Pp_{\max}^\alpha$ and $\Pp_{\min}^\alpha$. In fact, according to Lem.~\ref{lem:PmaxPmin}, $\Ss_\infty^\alpha$ equals the MRPI set and, if $\Rr_{\infty}^\alpha\subseteq \X$, $\Rr_\infty^\alpha$ describes the mRPI set.
 
 \begin{lem}
 \label{lem:PmaxPmin}
-Let Assum.~\ref{assum:AXW} be satisfied. Then, $\Pp_{\max}^\alpha=\Ss_\infty^\alpha$ and 
+Let $\Rr_{\infty}^\alpha$ and $\Ss_\infty^\alpha$ be defined as in~\eqref{eq:RLimit} and~\eqref{eq:SLimit}. Then, $\Pp_{\max}^\alpha=\Ss_\infty^\alpha$ and 
 \begin{equation}
 \label{eq:Pmin}
 \Pp_{\min}^\alpha=\left\{ \begin{array}{ll}
@@ -275,63 +281,61 @@ Let Assum.~\ref{assum:AXW} be satisfied. Then, $\Pp_{\max}^\alpha=\Ss_\infty^\al
 \end{equation}
 \end{lem}
 
-From \cite[Eqs.~(5.1) and (5.2)]{Kolmanovsky1998}, we infer
+While both sequences~\eqref{eq:sequenceSk} and~\eqref{eq:sequenceRk} are linked to RPI sets, it seems 
+they are not closely related to one another.
+This conclusion is wrong, however, since we have 
 \begin{equation}
 \label{eq:relationSkRk}
 \Ss_{k}^\alpha = \bigcap_{j=0}^k (A^{j})^{-1} (\X \ominus \Rr_{j}^\alpha).
 \end{equation}
-Since the statement is not trivial a formal proof can be found in the appendix for completeness
-
+according to \cite[Eqs.~(5.1) and (5.2)]{Kolmanovsky1998}.
+Since our setup slightly differs from \cite{Kolmanovsky1998}, we formally prove relation~\eqref{eq:relationSkRk} in the appendix for completeness. Finally, having~\eqref{eq:relationSkRk}, it is easy to see that 
 \begin{equation}
 \label{eq:relationSkRkPlus1}
-\Ss_{k+1}^\alpha = (A^{k+1})^{-1} (\X \ominus \Rr_{k+1}^\alpha) \cap \Ss_k^\alpha.
+\Ss_{k+1}^\alpha = (A^{k+1})^{-1} (\X \ominus \Rr_{k+1}^\alpha) \cap \Ss_k^\alpha
 \end{equation}
+holds for every $k \in \N$.
+
+
+%\begin{assum}
+%\label{assum:AXW}
+%The eigenvalues $\lambda \in \C$ of the matrix $A \in \R^{n \times n}$ are strictly stable (i.e., $| \lambda|<1$).
+%The sets $\X$ and $\W^\ast$ are C-sets in $\R^n$.
+%\end{assum}
+
 
 \section{Parametric robust positively invariant sets}
 \label{sec:parametricRPIsets}
 
-
-
-interval $\I \subset \R_+$
-
-
-
-
-\begin{equation}
+As sketched in the introduction, we intend to simultaneously analyze a family of RPI sets for system~\eqref{eq:system}$-$\eqref{eq:constraints} with different scaling factors $\alpha$.
+Similar to \cite{Schaich2015}, we will describe these parametric sets in a lifted space of dimension $n+1$, where the first $n$ dimensions are linked to the state space and where the ($n+1$)-th dimension refers to the parameter $\alpha$.
+As a preparation, we introduce the sets 
+\begin{align}
 \label{YIk}
-\Y^{\I}_k := \left\{ \begin{pmatrix}
+\Y^{\I}_k &:= \left\{ \begin{pmatrix}
 x \\
 \alpha 
-\end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \Rr_k^\alpha,\,\,  \alpha \in \I \right\} 
-\end{equation}
-
-\begin{equation}
+\end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \Rr_k^\alpha,\,\,  \alpha \in \I \right\} \quad \text{and} \\
 \label{ZIk}
-\Z^{\I}_k := \left\{ \begin{pmatrix}
+\Z^{\I}_k &:= \left\{ \begin{pmatrix}
 x \\
 \alpha 
 \end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \Ss_k^\alpha,\,\, \alpha \in \I  \right\} 
-\end{equation}
-
-%\begin{equation}
-%\label{XI}
-%\Cc^{\I} := \left\{ \begin{pmatrix}
-%x \\
-%\alpha 
-%\end{pmatrix} \in \R^{n+1} \,\Big|\, x \in \X,\,\,  \alpha \in \I \right\} 
-%\end{equation}
-
-
-
-\begin{equation}
-\label{eq:criticalAlpha}
-\alpha^\ast :=  \sup_{\alpha} \,\alpha \quad \text{s.t.} \quad \alpha \, \Rr^1_\infty \subseteq \X
-\end{equation}
-
-
-\begin{thm}
-Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} $ and let $k \in \N_+$. Then, $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ is a compact, convex and full-dimensional set in $\R^{n+1}$.
-\end{thm}
+\end{align}
+for some (potentially degenerated) interval $\I \subset \R_+$ (e.g., $\I=[\lb{\alpha},\ub{\alpha}]$ or $\I=\alpha$).
+Clearly, $\Y^{\I}_k$ and $\Z^{\I}_k$ can be understood as a parametric variant of $\Rr_k^\alpha$ and $\Ss_k^\alpha$ in the lifted space $\R^{n+1}$.
+Consequently, the limits 
+\begin{align}
+\label{eq:YLimit}
+\Y_\infty^\I &:=\lim_{k \rightarrow \infty} \Y_k^\I =  \bigcup_{k=0}^\infty \Y_k^\I \quad \text{and} \\
+\label{eq:ZLimit}
+\Z_\infty^\I &:=\lim_{k \rightarrow \infty} \Z_k^\I  = \bigcap_{k=0}^\infty \Z_k^\I 
+\end{align}
+describe parametric versions of mRPI and MPRI sets.
+In \cite[Lem.~5.2]{Schaich2015} it is shown that $\Z_\infty^{[\lb{\alpha},\ub{\alpha}]}$ is a polytope if $\X$ and $\W^\ast$ are polytopes.
+Here we show that $\Z_\infty^{[\lb{\alpha},\ub{\alpha}]}$ is a convex, compact, and full-dimensional set in $\R^n$ if $\X$ and $\W^\ast$ are C-sets (as assumed). Moreover, we show that $\Y_\infty^{[\lb{\alpha},\ub{\alpha}]}$ can be approximated arbitrarily close by a convex, compact, and full-dimensional set in $\R^{n+1}$.
+In addition, this outer approximation will be such that the contained sets for a fixed $\alpha \in [\lb{\alpha},\ub{\alpha}]$ are RPI sets for or~\eqref{eq:system} with~\eqref{eq:constraints}.
+We begin our analysis with two linked statements about the sets $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$.
 
 \begin{lem}
 \label{lem:YalphaConvY1}
@@ -353,13 +357,29 @@ Consider any $\alpha \in \R_+$ and note that
 We consequently have $\Y^{\alpha}_k =\alpha\,\Y^{1}_k $, which immediately proves the claim.
 \end{proof}
 
+\begin{thm}
+\label{thm:YkCCF}
+Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} $ and let $k \in \N_+$. Then, $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ is a compact, convex and full-dimensional set in $\R^{n+1}$.
+\end{thm}
+
+
+
 
 
 \begin{proof}
-The sets $\Rr_k^{1}$ are C-sets in $\R^n$ for every $k \in \N_+$. This observation in combination with Lem.~\ref{lem:YalphaConvY1} proves the claim.
+Obviously, since $\W^\ast$ is a C-set in $\R^n$, the sets $\Rr_k^{1}$ are C-sets in $\R^n$ for every $k \in \N_+$. This observation in combination with Lem.~\ref{lem:YalphaConvY1} proves the claim.
 \end{proof}
 
+Compared to the statements in Lem.~\ref{lem:YalphaConvY1} and Thm.~\ref{thm:YkCCF}, the analysis of the sets $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ is slightly more complicated.
+The reason is that the sets $\Ss_k^\alpha$ may be empty for some $\alpha \in \R_+$ and $k \in \N_+$. In fact, it is easy to see that $\Ss_k^\alpha$ will be empty for some $k \in \N_+$ if the scaling $\alpha$ is chosen bigger than the critical scaling
+\begin{equation}
+\label{eq:criticalAlpha}
+\alpha^\ast :=  \sup_{\alpha} \,\alpha \quad \text{s.t.} \quad \alpha \, \Rr^1_\infty \subseteq \X.
+\end{equation}
+To see this, note that~\eqref{eq:criticalAlpha} in combination with~\eqref{eq:RkAlphaRk1} implies $\Rr^\alpha_\infty \nsubseteq \X$ for any $\alpha>\alpha^\ast$. Consequently, $\Pp_{\min}^\alpha = \emptyset$ according to \eqref{eq:Pmin}, which immediately leads to $\Pp_{\max}^\alpha = \emptyset$. Due to $\Pp_{\max}^\alpha=\Ss_\infty^\alpha$ and~\eqref{eq:SLimit}, this can only be the case if $\Ss_k^\alpha = \emptyset$ for a finite $k \in \N_+$. As a consequence of this observation, the scalings $\alpha$ are restricted by $\alpha^\ast$ in Thms.~\ref{thm:ZkCCF}, \ref{thm:outerApproxYinfI}, and \ref{thm:ZfinitelyDetermined}.
+
 \begin{thm}
+\label{thm:ZkCCF}
 Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} \leq \alpha^\ast$ and let $k \in \N$. Then, $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ is a compact, convex and full-dimensional set in $\R^{n+1}$.
 \end{thm}
 
@@ -440,9 +460,8 @@ Equations \eqref{eq:x1Sequence}, \eqref{eq:x1Sequence}, and \eqref{eq:xiW12} in 
 %Having $\hat{x} \notin \Ss_k^{\hat{\alpha}}$ consequently implies $x_1  \notin \Ss_k^{\hat{\alpha}}$ since $\Ss_k^{\hat{\alpha}}$ is convex.
 \end{proof}
 
-the limit $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is finitely determined, i.e., there exists a finite $N \in \N$ such that
-
-As a preperation, we introduce the scaling matrix
+In the following theorem, we address the accurate outer approximation of the set $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty$.
+The result can be understood as a parametric extension of \cite[Thm.~1]{Rakovic2005}. As a preperation, we introduce the scaling matrix
  $$
  E^\epsilon := \begin{pmatrix}
  (1+\epsilon) I_n & 0 \\ 0 & 1
@@ -457,13 +476,13 @@ P:=\begin{pmatrix}
 
 \begin{thm}
 \label{thm:outerApproxYinfI}
-Let Assum.~\ref{assum:AXW} be satisfied, let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha}< \alpha^\ast$, and let $\epsilon \in \R_+$.
- Assume $M \in \N$ is such that
+Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha}< \alpha^\ast$, let $\epsilon \in \R_+$, and
+ assume $M \in \N$ is such that
  \begin{equation}
 \label{eq:conditionYEpsApproximation}
 A^{M} \W^\ast \subseteq \mu \,\W^\ast \quad \text{with} \quad \mu:=\frac{\epsilon}{1+\epsilon}.
 \end{equation}
- Then,
+ holds. Then,
 $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subseteq E^\epsilon\Y^{[\lb{\alpha},\ub{\alpha}]}_M$.
  Moreover, if
  \begin{equation}
@@ -492,16 +511,19 @@ which proves that $(1+\epsilon) \Rr_M^\alpha$ is an RPI set  for~\eqref{eq:syste
 \end{proof}
 
 
-
-
+The approximation in Thm.~\ref{thm:outerApproxYinfI} is useful since 
+$\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is generally not finitely determined. In other words, we may have $\Y^{[\lb{\alpha},\ub{\alpha}]}_\infty \subset \Y^{[\lb{\alpha},\ub{\alpha}]}_k $ for every $k \in \N$. In contrast, as summarized in the following theorem, the 
+set $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty $ is always finitely determined.
 
 
 \begin{thm}
-Let Assum.~\ref{assum:AXW} be satisfied and let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} < \alpha^\ast$. Assume $N \in \N$ is such that
+\label{thm:ZfinitelyDetermined}
+Let $\lb{\alpha},\ub{\alpha}\in \R_+$ with $\lb{\alpha} < \ub{\alpha} < \alpha^\ast$ and assume $N \in \N$ is such that
  \begin{equation}
 \label{eq:conditionZFinitelyDetermined}
-A^{N+1} \X \subseteq \eta \,\X \quad \text{with} \quad \eta:=1-\frac{\ub{\alpha}}{\alpha^\ast}.
+A^{N+1} \X \subseteq \eta \,\X \quad \text{with} \quad \eta:=1-\frac{\ub{\alpha}}{\alpha^\ast}
 \end{equation}
+holds.
  Then,  $\Z^{[\lb{\alpha},\ub{\alpha}]}_\infty = \Z^{[\lb{\alpha},\ub{\alpha}]}_N $. Moreover,   $P \Z^{\alpha}_N$ is the MRPI set for~\eqref{eq:system} with~\eqref{eq:constraints} for every $\alpha \in [\lb{\alpha},\ub{\alpha}]$. 
 \end{thm}
 
@@ -559,7 +581,7 @@ according to~\eqref{eq:criticalAlpha} and \cite[Rem.~2.1]{Kolmanovsky1998}. Thus
 
 
 \begin{rem}
-Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproximation} and~\eqref{eq:conditionZFinitelyDetermined}, respectively, can always be found since both $\mu$ and $\eta$ lie in the interval $(0,1)$, since the eigenvalues of $A$ are strictly stable, and since $\X$ is a C-set according to Assum.~\ref{assum:AXW}. Assume, for example, that $\lb{r}_w,\ub{r}_w \in \R_+$ denote the radii of a ball that is contained in $\W^\ast$ and a ball that contains $\W^\ast$, respectively. Then, \eqref{eq:conditionYEpsApproximation} holds if 
+Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproximation} and~\eqref{eq:conditionZFinitelyDetermined}, respectively, can always be found since both $\mu$ and $\eta$ lie in the interval $(0,1)$, since the eigenvalues of $A$ are strictly stable, and since $\X$ is a C-set according by assumption. Assume, for example, that $\lb{r}_w,\ub{r}_w \in \R_+$ denote the radii of a ball that is contained in $\W^\ast$ and a ball that contains $\W^\ast$, respectively. Then, \eqref{eq:conditionYEpsApproximation} holds if 
 \begin{equation}
 \label{eq:MBoundApprox}
 \|A^M\|_2 \leq \frac{\mu \,\lb{r}_w}{\ub{r}_w}. 
@@ -573,11 +595,14 @@ Obviously, $M \in \N$ and $N \in \N$ satisfying~\eqref{eq:conditionYEpsApproxima
 
 \subsection{Approximation of the critical scaling}
 
-Accurate approximation of critical scaling $\alpha^\ast$ for a user-defined error bound $\epsilon \in \R_+$.
+\textcolor{red}{ONLY NOTES IN THE FOLLOWING}
+
+ Accurate approximation of critical scaling $\alpha^\ast$ for a user-defined error bound $\epsilon \in \R_+$.
 
 \begin{thm}
-Let Assum.~\ref{assum:AXW} be satisfied and let $\epsilon \in \R_+$.
- Assume $M \in \N$ is such that~\eqref{eq:conditionYEpsApproximation} holds and define
+\label{thm:approxCritScaling}
+Let $\epsilon \in \R_+$ and
+ assume $M \in \N$ is such that~\eqref{eq:conditionYEpsApproximation} holds and define
  \begin{equation}
 \label{eq:criticalAlphaApprox}
 \widehat{\alpha}^\ast :=  \max_{\alpha} \,\alpha \quad \text{s.t.} \quad \alpha \, (1+\epsilon)\, \Rr^1_M \subseteq \X.
@@ -636,7 +661,7 @@ Polytopic sets $\X$ and $\W^\ast$ do not only simplify the computation of $\Y^{[
 \Z^{[\lb{\alpha},\ub{\alpha}]}_k$.
 They also allow to efficiently compute $M$, $N$, and $\widehat{\alpha}^\ast$ as in~\eqref{eq:conditionYEpsApproximation}, \eqref{eq:conditionZFinitelyDetermined}, and~\eqref{eq:criticalAlphaApprox}. 
 In fact, as discussed in \cite[Eq.~(10)]{Rakovic2005},
-relation~\eqref{eq:conditionYEpsApproximation} holds if and only if 
+\eqref{eq:conditionYEpsApproximation} holds if and only if 
 \begin{equation}
 \label{eq:MBoundPrecise}
  h_{\W^\ast}(H_w A^M) \leq \mu \,d_w.
@@ -647,24 +672,41 @@ Analogously, \eqref{eq:conditionZFinitelyDetermined} holds if and only if
 \label{eq:NBoundPrecise}
  h_{\X}(H_x A^{N+1}) \leq \eta \,d_x.
 \end{equation}
-Finally, according to \cite[Eq.~(12)]{Rakovic2005}, the solution of~\eqref{eq:criticalAlphaApprox} evaluates to
+Finally, similar to \cite[Eq.~(12)]{Rakovic2005}, the solution of the optimization~\eqref{eq:criticalAlphaApprox} evaluates to
 $$
 \widehat{\alpha}^\ast = \min_{i \in \N_{[1,L_x]}} \frac{e_i^T d_x}{(1+\epsilon)\,\sum_{k=0}^{M-1} h_{\W^\ast}(e_i^T H_x A^k) }.
 $$
-
+Note that the explicit computation of $\Rr_M^1$ is not required to solve~\eqref{eq:criticalAlphaApprox}.
+In the following, we analyze two examples to illustrate the statements in Lem.~\ref{lem:YalphaConvY1} and Thms.~\ref{thm:outerApproxYinfI}, \ref{thm:ZfinitelyDetermined}, and \ref{thm:approxCritScaling}.
 
 \subsection{Example 1}
 
 We first consider system~\eqref{eq:system} with 
 $A=0.5$
 and the constraints $\X=[-2,2]$ and $\W^\ast=[-1,1]$. For this simple example, which was also analyzed in \cite[Exmp.~6.10]{Blanchini2008} (without state constraints), the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ can be explicitly stated. 
-In fact, it is easy to see that we 
+In fact, it is easy to prove that we obtain 
+$$
+\Rr_k^\alpha=[-\rho_k^\alpha,\rho_k^\alpha] \quad \text{with} \quad\rho_k^\alpha:=\alpha \, (2 - 0.5^k) 
+$$
+and
+$$
+\Ss_k^\alpha = \left\{ \begin{array}{ll}
+\X & \text{if} \quad \alpha \leq 1, \\
+\,\![-\sigma_k^\alpha,\sigma_k^\alpha] & \text{if} \quad \alpha > 1 \,\, \text{and} \,\, k \leq \left\lfloor \log_2 \left( \frac{2\,\alpha}{\alpha-1} \right)\right\rfloor,\\
+\emptyset & \text{otherwise}
+\end{array}\right.
+$$
+with 
+$$
+\sigma_k^\alpha:=2\,\alpha -2^{k+1} (\alpha-1).
+$$
 
 $$
-\rho_k^\alpha:=\alpha \, (2 - 0.5^k)
+\sigma_k^\alpha:= \left\{ \begin{array}{ll}
+2 \\
+\end{array}\right.
 $$
 
-$\alpha^\ast=1$
 
 $\widehat{\alpha}^\ast=...$ for $\epsilon=0.1$, $\mu=\frac{1}{11}$
 
@@ -703,6 +745,8 @@ $\begin{pmatrix}
  
  $\ub{\alpha}=2.5$
 
+\textcolor{red}{Merge second example section in previous one!}
+
 \input{Example.tex}
 
 \section{Conclusion and outlook}
@@ -720,8 +764,8 @@ $\begin{pmatrix}
 \appendix
 
 \begin{lem}
-\label{lem:PmaxPmin}
-Let Assum.~\ref{assum:AXW} be satisfied, let $\alpha \in \R_+$, and let $k \in \N$. Then, the set $\Ss_k^\alpha$ defined by the sequence~\eqref{eq:sequenceSk} can be expressed as in~\eqref{eq:relationSkRk}.
+\label{lem:SkRk}
+Let $k \in \N$. Then, the set $\Ss_k^\alpha$ defined by the sequence~\eqref{eq:sequenceSk} can be expressed as in~\eqref{eq:relationSkRk}.
 \end{lem}
 
 \begin{proof}
