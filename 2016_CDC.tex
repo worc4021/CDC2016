@@ -580,14 +580,14 @@ Let Assum.~\ref{assum:AXW} be satisfied and let $\epsilon \in \R_+$.
  Assume $M \in \N$ is such that~\eqref{eq:conditionYEpsApproximation} holds and define
  \begin{equation}
 \label{eq:criticalAlphaApprox}
-\hat{\alpha}^\ast :=  \max_{\alpha} \,\alpha \quad \text{s.t.} \quad \alpha \, (1+\epsilon)\, \Rr^1_M \subseteq \X.
+\widehat{\alpha}^\ast :=  \max_{\alpha} \,\alpha \quad \text{s.t.} \quad \alpha \, (1+\epsilon)\, \Rr^1_M \subseteq \X.
 \end{equation}
-Then, $\hat{\alpha}^\ast \leq \alpha^\ast \leq (1+\epsilon)\, \hat{\alpha}^\ast$.
+Then, $\widehat{\alpha}^\ast \leq \alpha^\ast \leq (1+\epsilon)\, \widehat{\alpha}^\ast$.
 \end{thm}
 
 \begin{proof}
 Analogously to the proof of Thm.~\ref{thm:outerApproxYinfI}, satisfaction of \eqref{eq:conditionYEpsApproximation} yields
-\eqref{eq:RInfty1EpsApproximation}. In combination with~\eqref{eq:criticalAlphaApprox}, we thus obtain $ \hat{\alpha}^\ast\,\Rr_\infty^1 \subseteq  \hat{\alpha}^\ast (1+\epsilon) \, \Rr_M^1 \subseteq \X$ which implies $\hat{\alpha}^\ast \leq \alpha^\ast $ according to~\eqref{eq:criticalAlpha}. Similarly, we have $\alpha^\ast \,\Rr_M^1 \subseteq \alpha^\ast \,\Rr_\infty^1 \subseteq \X$ by construction and thus $\alpha^\ast \leq (1+\epsilon)\, \hat{\alpha}^\ast$.
+\eqref{eq:RInfty1EpsApproximation}. In combination with~\eqref{eq:criticalAlphaApprox}, we thus obtain $ \widehat{\alpha}^\ast\,\Rr_\infty^1 \subseteq  \widehat{\alpha}^\ast (1+\epsilon) \, \Rr_M^1 \subseteq \X$ which implies $\widehat{\alpha}^\ast \leq \alpha^\ast $ according to~\eqref{eq:criticalAlpha}. Similarly, we have $\alpha^\ast \,\Rr_M^1 \subseteq \alpha^\ast \,\Rr_\infty^1 \subseteq \X$ by construction and thus $\alpha^\ast \leq (1+\epsilon)\, \widehat{\alpha}^\ast$.
 \end{proof}
 
 
@@ -596,20 +596,22 @@ Analogously to the proof of Thm.~\ref{thm:outerApproxYinfI}, satisfaction of \eq
 In Sect.~\ref{sec:parametricRPIsets}, we discussed properties of parametric RPI sets and the approximation of the critical scaling $\alpha^\ast$ for general C-sets $\X$ and $\W^\ast$.
 However, the actual computation of the sets $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ and $\Z^{[\lb{\alpha},\ub{\alpha}]}_k$ and the approximation of $\alpha^\ast$ is demanding for this general setup. 
 We thus consider polytopic sets $\X$ and $\W^\ast$ to illustrate the  findings in Sect.~\ref{sec:parametricRPIsets}. 
-In this case, it is well-known that the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ are  polytopes as well.
-As for $\Rr_k^\alpha$, this observation immediately follows from~\eqref{eq:RkAlphaRk1}. Regarding $\Ss_k^\alpha$, we first
-assume that the state constraints $\X$ are given by
+More precisely, we assume $\X$ and $\W^\ast$ can be written as
+\begin{align}
+\nonumber
+\X \!= \!\{ x \in \R^n \,|\, H_x  x \leq d_x \}  \,\, \text{and}  \,\,
+\W^\ast\! = \! \{ w \!\in \R^n \,|\, H_w  w \leq d_w \}
+\end{align}
+with $H_x \in \R^{L_x \times n}$, $d_x \in \R^{L_x}$,  $H_w \in \R^{L_w \times n}$.
+For polytopic $\X$ and $\W^\ast$, it is well-known that the sets $\Rr_k^\alpha$ and $\Ss_k^\alpha$ are  polytopes as well.
+As for $\Rr_k^\alpha$, this observation immediately follows from~\eqref{eq:RkAlphaRk1}. Regarding $\Ss_k^\alpha$, 
+we find
 $$
-\X = \{ x \in \R^n \,|\, H_x \, x \leq \boldsymbol{1} \}
+\Ss_k^\alpha \!=\!\bigg\{ x\in \R^n \bigg| H_x A^j x \leq d_x - \sum_{i=0}^{j-1} \!h_{\W^\alpha}(H_x A^i), 
+ \forall j  \in \N_{[0,k]} \!\bigg\}
 $$
-with $H \in \R^{L \times n}$ and $d \in \R^L$.
-Then,  the sets $\Ss_k^\alpha$ can be expressed as
-\begin{equation}
-\label{eq:SkPolytope}
-\!\,\Ss_k^\alpha \!=\! \bigg\{ \!x \!\in\! \R^n \bigg| H A^j x \leq d -\! \sum_{i=0}^{j-1} \!h_{\W^\alpha}\!\,(H A^i), \, \forall j \! \in \! \N_{[0,k]} \!\bigg\}\!\!\!\!\!
-\end{equation}
-according to \cite[p. 342]{Kolmanovsky1998}.
-Thereby, the term $h_{\W^\alpha} (H A^i)$ can be computed by solving $L$ linear programs. 
+according to  \cite[p. 342]{Kolmanovsky1998}.
+Thereby, the term $h_{\W^\alpha} (H_x A^i)$ can be computed by solving $L_x$ linear programs. 
 Having polytopic sets $\Rr_k^\alpha$ and taking Lem.~\ref{lem:YalphaConvY1} into account, immediately implies that $
 \Y^{[\lb{\alpha},\ub{\alpha}]}_k$ is a polytope.
 To see that $
@@ -619,12 +621,12 @@ To see that $
 h_{\W^\alpha}(c) = \sup_{w \in \W^\alpha}  c \,w = \alpha \sup_{w^\ast \in \W^\ast}  c \, w^\ast = \alpha \, h_{\W^\ast}(c)
 \end{equation}
 for any $c \in \R^{1 \times n}$.
-Using~\eqref{eq:hWalpha} in~\eqref{eq:SkPolytope} and substituting the result in~\eqref{ZIk} yields
+Using~\eqref{eq:hWalpha} in the above expression for $\Ss_k^\alpha$ and substituting the result in~\eqref{ZIk} yields
 \begin{align}
 \nonumber
-\!\!\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \bigg \{ z \in \R^{n+1} \,\bigg|\, \begin{pmatrix} H A^j & \sum \limits_{i=0}^{j-1} h_{\W^\ast}(H A^i)  \end{pmatrix} z \leq d, \!\!\!\!\!\!\\
+\!\!\!\!\Z_k^{[\lb{\alpha},\ub{\alpha}]}= \bigg \{ z \in \R^{n+1} \,\bigg|\, \begin{pmatrix} H_x A^j & \sum \limits_{i=0}^{j-1} h_{\W^\ast}(H_x A^i)  \end{pmatrix} z \leq d_x, \!\!\!\!\!\!\!\!\!\!\!\!\\
 \label{eq:ZkPolytope}
-\lb{\alpha} \leq z_{n+1} \leq \ub{\alpha},  \, \forall  j \in \N_{[0,k]} \bigg\} \quad  \!\!\!\!\!
+\lb{\alpha} \leq z_{n+1} \leq \ub{\alpha},  \, \forall  j \in \N_{[0,k]} \bigg\} \quad \quad \!\!\!\!\!\!\!\!\!\!
 \end{align}
 after some basic manipulations.
 Clearly, $\Z_k^{[\lb{\alpha},\ub{\alpha}]}$ as in~\eqref{eq:ZkPolytope} is a polytope. 
@@ -632,18 +634,23 @@ This observation is discussed in more detail in~\cite{Schaich2015}.
 
 Polytopic sets $\X$ and $\W^\ast$ do not only simplify the computation of $\Y^{[\lb{\alpha},\ub{\alpha}]}_k$ and $
 \Z^{[\lb{\alpha},\ub{\alpha}]}_k$.
-They also allow to efficiently and accurately compute $M$, $N$, and $\hat{\alpha}^\ast$ as in such that~\eqref{eq:conditionYEpsApproximation}, \eqref{eq:conditionZFinitelyDetermined}, and~\eqref{eq:criticalAlphaApprox}. 
-
-
+They also allow to efficiently compute $M$, $N$, and $\widehat{\alpha}^\ast$ as in~\eqref{eq:conditionYEpsApproximation}, \eqref{eq:conditionZFinitelyDetermined}, and~\eqref{eq:criticalAlphaApprox}. 
 In fact, as discussed in \cite[Eq.~(10)]{Rakovic2005},
-Eq.~\eqref{eq:conditionYEpsApproximation} holds if and only if 
+relation~\eqref{eq:conditionYEpsApproximation} holds if and only if 
+\begin{equation}
+\label{eq:MBoundPrecise}
+ h_{\W^\ast}(H_w A^M) \leq \mu \,d_w.
+\end{equation}
+In general, condition~\eqref{eq:MBoundPrecise} outperforms the more conservative condition~\eqref{eq:MBoundApprox}.
+Analogously, \eqref{eq:conditionZFinitelyDetermined} holds if and only if 
+\begin{equation}
+\label{eq:NBoundPrecise}
+ h_{\X}(H_x A^{N+1}) \leq \eta \,d_x.
+\end{equation}
+Finally, according to \cite[Eq.~(12)]{Rakovic2005}, the solution of~\eqref{eq:criticalAlphaApprox} evaluates to
 $$
-\max_{i \in \N_{[1,l_w]}} h_{\W^\ast}((e_i^T H_w A^M)^T) \leq \mu 
+\widehat{\alpha}^\ast = \min_{i \in \N_{[1,L_x]}} \frac{e_i^T d_x}{(1+\epsilon)\,\sum_{k=0}^{M-1} h_{\W^\ast}(e_i^T H_x A^k) }.
 $$
-
-In fact, for a polytopic set $\W^\ast$ it is not necessary to 
-
-{eq:MBoundApprox}
 
 
 \subsection{Example 1}
@@ -659,18 +666,18 @@ $$
 
 $\alpha^\ast=1$
 
-$\hat{\alpha}^\ast=...$ for $\epsilon=0.1$, $\mu=\frac{1}{11}$
+$\widehat{\alpha}^\ast=...$ for $\epsilon=0.1$, $\mu=\frac{1}{11}$
 
 $\lb{\alpha}=0.2$,
 $\ub{\alpha}=0.8$
 
 Since
 $$
-\epsilon \leq  \frac{\hat{\alpha}^\ast}{\ub{\alpha}}-1 = .. \leq \frac{\alpha^\ast}{\ub{\alpha}}-1 = 0.25,
+\epsilon \leq  \frac{\widehat{\alpha}^\ast}{\ub{\alpha}}-1 = .. \leq \frac{\alpha^\ast}{\ub{\alpha}}-1 = 0.25,
 $$
 
 $$
-\hat{\eta}:= 1 - \frac{\ub{\alpha}}{\hat{\alpha}^\ast} = ... \leq 
+\hat{\eta}:= 1 - \frac{\ub{\alpha}}{\widehat{\alpha}^\ast} = ... \leq 
 $$
 
 \subsection{Example 2}
